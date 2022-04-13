@@ -5,6 +5,8 @@
     - Gabriel Portela Saliba: 2017002466
     - Gabriel Teixeira Lara Chaves: 2017088182
     - Pedro Barbosa Bahia: 2018019907
+    - Gabriel Camatta Zanotelli: 2018020140
+    - Túlio Dias Altíssimo: 2017014375
 
 ## Sistema de Visualização de Espectrograma de Áudio
 
