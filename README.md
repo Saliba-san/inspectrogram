@@ -26,3 +26,17 @@
     - front: React.js
     - back: Flask
     - BD: MySQL
+
+### Histórias
+
+    - História: Como usuário, quero fazer o upload de um áudio
+    
+    - História: como usuário, quero deletar o áudio subido
+    
+    - História: Como usuário, eu quero visualizar o espectograma
+    
+    - História: Como usuário, quero variar os parâmetros do espectrograma
+    
+    - História: Como usuário, quero visualizar seções específicas do áudio
+    
+    - História: Como usuário, quero adicionar um filtro de áudio
