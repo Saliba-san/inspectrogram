@@ -42,7 +42,8 @@
         - Projetar e implementar interface de visualização de espectrograma
         - Implementar envio de requisição para geração de espectrograma
         - Implementar geração de espectrograma
-        - Exibir espectrograma em interface apropriada
+        - Armazenar imagem resultante
+        - Exibir imagem em interface apropriada
 
     - História: Como usuário, quero variar os parâmetros do espectrograma
         - Projetar e implementar interface para inserção de parâmetros
