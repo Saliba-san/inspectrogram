@@ -30,13 +30,23 @@
 ### Histórias
 
     - História: Como usuário, quero fazer o upload de um áudio
-    
+        - Projetar e implementar interface de upload
+        - Implementar rota de upload de áudio
+        - Armazenar áudio
+
     - História: como usuário, quero deletar o áudio subido
-    
+        - Projetar e implementar interface de remoção de áudio armazenado
+        - Implementar remoção de áudio armazenado
+
     - História: Como usuário, eu quero visualizar o espectograma
-    
+        - Projetar e implementar interface de visualização de espectrograma
+        - Implementar envio de requisição para geração de espectrograma
+        - Implementar geração de espectrograma
+        - Exibir espectrograma em interface apropriada
+
     - História: Como usuário, quero variar os parâmetros do espectrograma
-    
+        - Projetar e implementar interface para inserção de parâmetros
+
     - História: Como usuário, quero visualizar seções específicas do áudio
-    
-    - História: Como usuário, quero adicionar um filtro de áudio
+        - Elaborar formas de selecionar seção desejada
+        - Elaborar e implementar forma de exibir seção selecionada
