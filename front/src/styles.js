@@ -21,5 +21,29 @@ export const useStyles = makeStyles({
         color: "#ccc8c8",
         background: "#9A4AECFF",
         border: 0
-    }
+    },
+    botaoDeletar: {
+        fontWeight: 800,
+        borderRadius: 10,
+        height: 40,
+        paddingRight: 10,
+        paddingLeft: 10,
+        color: "#f12d2d",
+        background: "transparent",
+        borderWidth: 4,
+        borderColor: "#f12d2d"
+    },
+    formGroup: {
+        marginBottom: 10,
+    },
+    formControl: {
+        width: '100%',
+        display: "block",
+        padding: '0.375rem 0.75rem',
+        fontSize: '1rem',
+        fontWeight: 700,
+        color: "#ccc8c8",
+        border: "1px solid #ccc8c8",
+        borderRadius: '0.25rem',
+    },
 })

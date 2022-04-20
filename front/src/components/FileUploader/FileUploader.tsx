@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Button from '@mui/material/Button';
-import { Typography } from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
 import {sendFileRequest} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
@@ -9,6 +9,7 @@ export function FileUploader() {
 
     const [file, setFile] = useState( {} );
     const [isLoading, setIsLoading] = useState( false );
+    const formRef = useRef<HTMLFormElement>(null);
     const classes = useStyles();
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +22,7 @@ export function FileUploader() {
         }
     }
 
-    const submitFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    function submitFile(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
 
         setIsLoading(true);
@@ -30,33 +31,66 @@ export function FileUploader() {
 
         // data.append("file", file, "file")
 
-        const response = sendFileRequest( data )
+        const response = sendFileRequest(data)
+
     }
+
+    function clearForm () {
+        if(formRef.current !== null)
+            formRef.current.reset();
+    }
+
 
     return(
         <React.Fragment>
-            <form method="post" onSubmit={ () => {
-                submitFile
-            }}>
-                <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
-                    Arraste seu arquivo para cá
-                </Typography>
+
+            <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
+                Arraste seu arquivo para cá
+            </Typography>
+
+            <form
+                id="form"
+                method="post"
+                ref={ formRef }
+            >
+                <Grid
+                    container
+                    direction="column"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
                 { isLoading ?
                     <div>
-                        <div className="form-group files">
+                        <CircularProgress />
+                    </div>
+
+                :
+                    <div>
+                        <div className={classes.formGroup}>
                             <input
                                 onChange={onInputChange}
-                                type="file" className="form-control"
+                                type="file" className={classes.formControl}
                                 style={{background: "transparent", color: "ccc8c8"}}
                             />
                         </div>
-                        <button className={classes.botaoEnviar}>
-                        Enviar
-                    </button>
+                        <Grid
+                            direction="column"
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <button className={classes.botaoEnviar} onClick={ (event) => {
+                                submitFile(event)
+                            }}>
+                                Enviar
+                            </button>
+                        </Grid>
                     </div>
-                : <CircularProgress />
                 }
+                </Grid>
             </form>
+            <button onClick={clearForm} className={classes.botaoDeletar}>
+                Limpar
+            </button>
         </React.Fragment>
     );
 }

@@ -1,15 +1,13 @@
-import {Link, useNavigate} from 'react-router-dom'
 import React, { useState} from 'react'
 import {useStyles} from "../styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@mui/material/Typography';
 import {FileUploader} from "../components/FileUploader/FileUploader";
+import {Grid, Typography} from "@mui/material";
 
 export function Main () {
 
     const classes = useStyles();
 
-    return(
+    return (
         <React.Fragment>
             <Grid
                 className={classes.mainContainer}
@@ -18,7 +16,7 @@ export function Main () {
                 xs={12} md={12} lg={12} xl={12}
             >
                 <Grid
-                    container alignItems="center"  direction="column"
+                    container alignItems="center" direction="column"
                     xs={12} md={12} lg={12} xl={12}
                 >
                     <Typography variant="h4" style={{fontWeight: 700, color: "#ccc8c8"}}>
@@ -33,5 +31,5 @@ export function Main () {
                 </Grid>
             </Grid>
         </React.Fragment>
-    )
+    );
 }

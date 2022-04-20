@@ -1,7 +1,7 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {Main} from "./views/Main";
+import {createTheme, ThemeProvider} from "@mui/material";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 const theme = createTheme({
   palette: {
