@@ -30,24 +30,25 @@
 ### Histórias
 
     - História: Como usuário, quero fazer o upload de um áudio
-        - Projetar e implementar interface de upload
-        - Implementar rota de upload de áudio
-        - Armazenar áudio
+        - Projetar e implementar interface de upload [Zanotelli]
+        - Implementar rota de upload de áudio [Túlio]
+        - Armazenar áudio [Túlio]
 
     - História: como usuário, quero deletar o áudio subido
-        - Projetar e implementar interface de remoção de áudio armazenado
-        - Implementar remoção de áudio armazenado
+        - Projetar e implementar interface de remoção de áudio armazenado [Zanotelli]
+        - Implementar remoção de áudio armazenado [Bahia]
 
     - História: Como usuário, eu quero visualizar o espectograma
-        - Projetar e implementar interface de visualização de espectrograma
-        - Implementar envio de requisição para geração de espectrograma
-        - Implementar geração de espectrograma
-        - Armazenar imagem resultante
-        - Exibir imagem em interface apropriada
+        - Projetar e implementar interface de visualização de espectrograma [Saliba]
+        - Implementar envio de requisição para geração de espectrograma [Lara]
+        - Implementar geração de espectrograma [Lara]
+        - Armazenar imagem resultante [Túlio]
+        - Exibir imagem em interface apropriada [Bahia]
 
     - História: Como usuário, quero variar os parâmetros do espectrograma
-        - Projetar e implementar interface para inserção de parâmetros
+        - Projetar e implementar interface para inserção de parâmetros [Zanotelli]
+        - Incorporação de parâmetros em geração [Saliba]
 
     - História: Como usuário, quero visualizar seções específicas do áudio
-        - Elaborar formas de selecionar seção desejada
-        - Elaborar e implementar forma de exibir seção selecionada
+        - Elaborar formas de selecionar seção desejada [Saliba]
+        - Elaborar e implementar forma de exibir seção selecionada [Bahia]
