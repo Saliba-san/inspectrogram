@@ -3,6 +3,7 @@ import {useStyles} from "../styles";
 import {FileUploader} from "../components/FileUploader/FileUploader";
 import {Grid, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
+import HorizontalScroll from "react-scroll-horizontal";
 
 export function Main () {
 
@@ -35,7 +36,15 @@ export function Main () {
                     direction="column"
                     xs={12} md={12} lg={12} xl={12}
                 >
-                    <img src={pic} width={1000} height={500}/>
+                    <HorizontalScroll
+                        pageLock={true}
+                        reverseScroll={true}
+                        style={{ width: `160em`, height: `40em`}}
+                    >
+                        <div style={{width: "250em", height:"50em"}}>
+                            <img style={{width: "250em", height:"50em"}} src={pic}/>
+                        </div>
+                    </HorizontalScroll>
                 </Grid>
                 <Grid
                     container 
