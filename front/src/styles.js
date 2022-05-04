@@ -20,9 +20,10 @@ export const useStyles = makeStyles({
         paddingLeft: 10,
         color: "#ccc8c8",
         background: "#9A4AECFF",
-        border: 0
+        border: 0,
+        marginRight:10
     },
-    botaoDeletar: {
+    botaoCancelar: {
         fontWeight: 800,
         borderRadius: 10,
         height: 40,
@@ -32,6 +33,7 @@ export const useStyles = makeStyles({
         background: "transparent",
         borderWidth: 4,
         borderColor: "#f12d2d",
+        marginTop: 10
     },
     formGroup: {
         marginBottom: 10,

@@ -89,12 +89,20 @@ export function FileUploader() {
                                 >
                                     Enviar
                                 </button>
+                                <button
+                                    className={classes.botaoEnviar}
+                                    onClick={(event) => {
+                                        submitFile(event);
+                                    }}
+                                >
+                                    Deletar
+                                </button>
                             </Grid>
                         </Grid>
                     </form>
                 </Grid>
             }
-            <button onClick={clearForm} className={classes.botaoDeletar}>
+            <button onClick={clearForm} className={classes.botaoCancelar}>
                 Cancelar
             </button>
         </React.Fragment>
