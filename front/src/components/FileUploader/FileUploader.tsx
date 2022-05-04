@@ -33,63 +33,69 @@ export function FileUploader() {
 
         const response = sendFileRequest(data)
 
+        // colocar arquivo na tela
+
     }
 
     function clearForm () {
         if(formRef.current !== null)
             formRef.current.reset();
+        setIsLoading(false)
     }
 
 
     return(
         <React.Fragment>
-
-            <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
-                Arraste seu arquivo para cá
-            </Typography>
-
-            <form
-                id="form"
-                method="post"
-                ref={ formRef }
-            >
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-between"
-                    alignItems="center"
-                >
-                { isLoading ?
-                    <div>
-                        <CircularProgress />
-                    </div>
-
+            { isLoading ?
+                <div>
+                    <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
+                        Seu arquivo está sendo processado
+                    </Typography>
+                    <CircularProgress />
+                </div>
                 :
-                    <div>
-                        <div className={classes.formGroup}>
-                            <input
-                                onChange={onInputChange}
-                                type="file" className={classes.formControl}
-                                style={{background: "transparent", color: "ccc8c8"}}
-                            />
-                        </div>
+                <Grid alignContent="center">
+                    <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
+                        Arraste seu arquivo para cá
+                    </Typography>
+                    <form
+                        id="form"
+                        method="post"
+                        ref={formRef}
+                    >
                         <Grid
+                            container
                             direction="column"
                             justifyContent="space-between"
                             alignItems="center"
                         >
-                            <button className={classes.botaoEnviar} onClick={ (event) => {
-                                submitFile(event)
-                            }}>
-                                Enviar
-                            </button>
+                            <Grid
+                                direction="column"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                item
+                            >
+                                <div className={classes.formGroup}>
+                                    <input
+                                        onChange={onInputChange}
+                                        type="file" className={classes.formControl}
+                                        style={{background: "transparent", color: "ccc8c8"}}/>
+                                </div>
+                                <button
+                                    className={classes.botaoEnviar}
+                                    onClick={(event) => {
+                                        submitFile(event);
+                                    }}
+                                >
+                                    Enviar
+                                </button>
+                            </Grid>
                         </Grid>
-                    </div>
-                }
+                    </form>
                 </Grid>
-            </form>
+            }
             <button onClick={clearForm} className={classes.botaoDeletar}>
-                Limpar
+                Cancelar
             </button>
         </React.Fragment>
     );

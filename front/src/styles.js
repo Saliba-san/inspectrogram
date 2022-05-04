@@ -31,7 +31,7 @@ export const useStyles = makeStyles({
         color: "#f12d2d",
         background: "transparent",
         borderWidth: 4,
-        borderColor: "#f12d2d"
+        borderColor: "#f12d2d",
     },
     formGroup: {
         marginBottom: 10,
@@ -46,4 +46,9 @@ export const useStyles = makeStyles({
         border: "1px solid #ccc8c8",
         borderRadius: '0.25rem',
     },
+    specContainer: {
+        width: "80vw",
+        height: "50vh",
+        overflowY: "scroll"
+    }
 })
