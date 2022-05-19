@@ -4,6 +4,7 @@ import {FileUploader} from "../components/FileUploader/FileUploader";
 import {Box, Container, Grid, Paper, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
 import HorizontalScroll from "react-scroll-horizontal";
+import Cropper from 'react-easy-crop'
 
 export function Main () {
 
