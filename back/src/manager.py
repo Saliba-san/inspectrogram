@@ -7,6 +7,7 @@ def deploy():
 	app.app_context().push()
 
 	# create database and tables
+	db.drop_all()
 	db.create_all()
 	
 deploy()

@@ -1,2 +1,8 @@
 # dependencies
 /venv
+
+#music files
+/files/*
+
+/src/__pycache__
+/src/data/database.db

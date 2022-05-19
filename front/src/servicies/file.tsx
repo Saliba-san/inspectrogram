@@ -1,10 +1,10 @@
 import {api} from "./api";
 
-export const sendFileRequest = async (data: FormData) => {
+export const sendMusicRequest = async (data: FormData) => {
 
-    const headers = {'Content-Type': 'application/json'};
+    const headers = {'Content-Type': `multipart/form-data`};
 
-    const response = await api.post('inspectogram', JSON.stringify(data), {headers: headers})
+    const response = await api.post('musics-post', data, {headers: headers})
         .then(res => {
             console.log("Sucesso")
             return res

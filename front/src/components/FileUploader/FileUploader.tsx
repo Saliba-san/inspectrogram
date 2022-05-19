@@ -2,12 +2,12 @@ import React, {useEffect, useRef, useState} from "react";
 import Button from '@mui/material/Button';
 import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
-import {sendFileRequest} from "../../servicies/file";
+import {sendMusicRequest} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
 
 export function FileUploader() {
 
-    const [file, setFile] = useState( {} );
+    const [file, setFile] = useState(new Blob);
     const [isLoading, setIsLoading] = useState( false );
     const formRef = useRef<HTMLFormElement>(null);
     const classes = useStyles();
@@ -21,20 +21,20 @@ export function FileUploader() {
             console.log("Nenhum arquivo válido encontrado.")
         }
     }
-
+    
     function submitFile(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-
+        
         setIsLoading(true);
-
+        
         const data = new FormData();
+        
+        console.log(file)
+        data.append("file", file)
 
-        // data.append("file", file, "file")
-
-        const response = sendFileRequest(data)
+        const response = sendMusicRequest(data)
 
         // colocar arquivo na tela
-
     }
 
     function clearForm () {
