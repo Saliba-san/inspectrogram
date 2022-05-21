@@ -21,7 +21,8 @@ export const useStyles = makeStyles({
         color: "#ccc8c8",
         background: "#9A4AECFF",
         border: 0,
-        marginRight:10
+        marginRight:10,
+        width: "50%"
     },
     botaoCancelar: {
         fontWeight: 800,
@@ -37,6 +38,7 @@ export const useStyles = makeStyles({
     },
     formGroup: {
         marginBottom: 10,
+
     },
     formControl: {
         width: '100%',
@@ -52,5 +54,13 @@ export const useStyles = makeStyles({
         width: "80vw",
         height: "50vh",
         overflowY: "scroll"
+    },
+    loadingContainer: {
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column"
+    },
+    formContainer: {
+        width: "30%"
     }
 })

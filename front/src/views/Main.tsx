@@ -5,7 +5,8 @@ import {Box, Container, Grid, Paper, Slider, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
 import HorizontalScroll from "react-scroll-horizontal";
 import ReactCrop, {Crop} from "react-image-crop";
-import {useImage} from "../hooks/useContexts";
+import {useImage, useSnack} from "../hooks/useContexts";
+import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
 
 export function Main () {
 
@@ -14,28 +15,7 @@ export function Main () {
     // Armazena o Id da imagem para comunicação com o Back
     const [spectogramId, setSpectogramId] = useState("")
 
-
-    const [specLenght, setSpecLenght] = useState([0,120])
     const {image} = useImage();
-
-
-    const minDistance = 30;
-
-    const handleChange1 = ( newValue: number, activeThumb: number) => {
-        if (!Array.isArray(newValue)) {
-            return;
-        }
-
-        if (activeThumb === 0) {
-            setSpecLenght([Math.min(newValue[0], specLenght[1] - minDistance), specLenght[1]]);
-        } else {
-            setSpecLenght([specLenght[0], Math.max(newValue[1], specLenght[0] + minDistance)]);
-        }
-    };
-
-    function valuetext(value: number) {
-        return `${value} s`;
-    }
 
     const [crop, setCrop] = useState<Crop>({
         unit: '%', // Can be 'px' or '%'
@@ -67,6 +47,7 @@ export function Main () {
                     <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
                         - Inspecione suas músicas aqui -
                     </Typography>
+                    <BaseSnackbar/>
                 </Grid>
                 <Grid
                     container
@@ -80,15 +61,7 @@ export function Main () {
                             <img src={pic} />
                         </ReactCrop>
                     </Paper>
-                    <Box sx={{ width: 300 }}>
-                        <Slider
-                            getAriaLabel={() => 'Minimum distance'}
-                            value={specLenght}
-                            valueLabelDisplay="auto"
-                            getAriaValueText={valuetext}
-                            disableSwap
-                        />
-                    </Box>
+                    <Slider/>
 
                 </Grid>
                 <Grid

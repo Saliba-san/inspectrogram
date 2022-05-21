@@ -4,15 +4,19 @@ import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
 import {sendFileRequest} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
-import {useImage} from "../../hooks/useContexts";
+import {useImage, useSnack} from "../../hooks/useContexts";
 
 export function FileUploader() {
 
     const {setImage} = useImage()
+    const {setSnackbar} = useSnack()
+
     const [file, setFile] = useState( {} );
     const [isLoading, setIsLoading] = useState( false );
+    const [blockDelete, setBlockDelete] = useState(true)
     const formRef = useRef<HTMLFormElement>(null);
     const classes = useStyles();
+
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files)
@@ -21,6 +25,10 @@ export function FileUploader() {
             setFile(e.target.files[0]);
         } else {
             console.log("Nenhum arquivo válido encontrado.")
+        }
+
+        if(file !== {}){
+            setBlockDelete(false)
         }
     }
 
@@ -38,76 +46,96 @@ export function FileUploader() {
         // setImage (response.data);
         // colocar arquivo na tela
 
+        setSnackbar(true, "teste")
     }
 
     function clearForm () {
         if(formRef.current !== null)
             formRef.current.reset();
         setIsLoading(false)
+        setFile({})
+        setBlockDelete(true)
     }
 
 
     return(
         <React.Fragment>
             { isLoading ?
-                <div>
+                <div className={classes.loadingContainer}>
                     <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
                         Seu arquivo está sendo processado
                     </Typography>
-                    <CircularProgress />
+                    <div style={{padding: "10px"}}>
+                        <CircularProgress />
+                    </div>
+                    <button onClick={clearForm} className={classes.botaoCancelar}>
+                        Cancelar
+                    </button>
                 </div>
                 :
-                <Grid alignContent="center">
-                    <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
-                        Arraste seu arquivo para cá
-                    </Typography>
-                    <form
-                        id="form"
-                        method="post"
-                        ref={formRef}
+                <Grid alignContent="center"
+                      container
+                      direction="column"
+                      xs={5} md={5} lg={3} xl={3}
+                >
+                    <Grid
+                        direction="column"
+                        xs={12} md={12} lg={12} xl={12}
                     >
-                        <Grid
-                            container
-                            direction="column"
-                            justifyContent="space-between"
-                            alignItems="center"
+                        <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
+                            Arraste seu arquivo para cá
+                        </Typography>
+                        <form
+                            id="form"
+                            method="post"
+                            ref={formRef}
+                            style={{width: "100%"}}
                         >
                             <Grid
+                                container
                                 direction="column"
                                 justifyContent="space-between"
                                 alignItems="center"
-                                item
                             >
-                                <div className={classes.formGroup}>
-                                    <input
-                                        onChange={onInputChange}
-                                        type="file" className={classes.formControl}
-                                        style={{background: "transparent", color: "ccc8c8"}}/>
-                                </div>
-                                <button
-                                    className={classes.botaoEnviar}
-                                    onClick={(event) => {
-                                        submitFile(event);
-                                    }}
+                                <Grid
+                                    direction="column"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    item
                                 >
-                                    Enviar
-                                </button>
-                                <button
-                                    className={classes.botaoEnviar}
-                                    onClick={(event) => {
-                                        submitFile(event);
-                                    }}
-                                >
-                                    Deletar
-                                </button>
+                                    <div className={classes.formGroup}>
+                                        <input
+                                            onChange={onInputChange}
+                                            type="file" className={classes.formControl}
+                                            style={{background: "transparent", color: "ccc8c8"}}/>
+                                    </div>
+
+
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </form>
+                        </form>
+                        <div style={{display: "flex"}}>
+                            <button
+                                className={classes.botaoEnviar}
+                                onClick={(event) => {
+                                    submitFile(event);
+                                }}
+                            >
+                                Enviar
+                            </button>
+                            <button
+                                className={classes.botaoEnviar}
+                                disabled={blockDelete}
+                                onClick={() => {
+                                    clearForm();
+                                }}
+                            >
+                                Deletar
+                            </button>
+                        </div>
+                    </Grid>
                 </Grid>
             }
-            <button onClick={clearForm} className={classes.botaoCancelar}>
-                Cancelar
-            </button>
         </React.Fragment>
     );
 }
