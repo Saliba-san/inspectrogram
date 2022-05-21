@@ -17,7 +17,7 @@ class Stft():
         self.db = parameters.db
         self.freq_slice = parameters.freq_slice
 
-    def get_stft(self, signal):
+    def set_stft(self, signal):
 
         mode_transform = {
                            "power": np.abs,
@@ -53,12 +53,15 @@ class Stft():
 
         fft_frames = np.flip(fft_frames, axis=0)
 
-        return fft_frames
+        self.fft_frames = fft_frames
 
-    def get_stft_from_audio(self, audio_signal):
+    def set_stft_from_audio(self, audio_signal):
 
         self.sr = audio_signal.sr
 
-        stft = self.get_stft(audio_signal.signal)
+        self.set_stft(audio_signal.signal)
 
-        return stft
+    def get_stft(self):
+        assert self.fft_frames is not None, "SFTF data not defined"
+
+        return self.fft_frames

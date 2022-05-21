@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from audio import AudioSignal
-from spectrogram import Stft
+from stft import Stft
 from parameters import StftParams
+from spectrogram import Spectrogram
 import librosa
 from librosa import display as ld
 
@@ -11,15 +12,16 @@ audio = AudioSignal("audio.wav")
 params = StftParams()
 stft = Stft(params)
 
-fft_frames = stft.get_stft_from_audio(audio)
+stft.set_stft_from_audio(audio)
+spectrogram = Spectrogram(stft)
 
 plt.subplot(2, 1, 1)
 
-flip = np.flip(fft_frames, axis=0)
-ld.specshow(flip, n_fft=params.frame_size,
-            hop_length=params.hop_length, sr=stft.sr , x_axis="s",
-            y_axis="linear")
+spectrogram.visualize()
 
 plt.subplot(2, 1, 2)
-plt.imshow(fft_frames, cmap="viridis")
+
+spectrogram.set_strategy("matplot")
+spectrogram.visualize()
+
 plt.show()

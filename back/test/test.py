@@ -1,8 +1,8 @@
 from flask import Flask, send_file
 from flask_restful import Resource, Api
 import matplotlib.pyplot as plt
-import librosa as rosa
 import parameters
+import librosa as rosa
 
 app = Flask("SpectrogramAPI")
 api = Api(app)
@@ -27,6 +27,7 @@ class Spectrogram(Resource):
         return send_file("image.png", mimetype="image/png")
 
     def post(self):
+
         return "Post"
 
 api.add_resource(Spectrogram, "/")
