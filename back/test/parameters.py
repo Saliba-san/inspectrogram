@@ -1,4 +1,4 @@
-class Stft:
+class StftParams:
 
     def __init__(self, frame_size=1024, hop_length=512, window="hann",
                  mode="power", cmap="prism", sr=None, db=True, freq_slice=None):

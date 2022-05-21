@@ -4,7 +4,7 @@ import parameters
 import matplotlib.pyplot as plt
 import librosa as rosa
 
-class Spectrogram():
+class Stft():
 
     def __init__(self, parameters):
 
@@ -51,7 +51,7 @@ class Spectrogram():
         if self.db:
             fft_frames = 10*np.log10(fft_frames)
 
-        fft_frames = np.flip(np.flip(fft_frames, axis=1), axis=0)
+        fft_frames = np.flip(fft_frames, axis=0)
 
         return fft_frames
 
