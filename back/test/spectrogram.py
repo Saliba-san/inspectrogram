@@ -1,0 +1,57 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from librosa import display as ld
+from abc import ABC, abstractmethod
+import copy
+
+class VisualizationStrategy(ABC):
+
+    @abstractmethod
+    def visualize(self):
+        pass
+
+class RosaVisualizationStrategy(VisualizationStrategy):
+
+    def visualize(self, stft, cmap=None):
+
+        fft_frames = copy.deepcopy(stft.fft_frames)
+        fft_frames = np.flip(fft_frames, axis=0)
+
+        ld.specshow(fft_frames, n_fft=stft.frame_size,
+                    hop_length=stft.hop_length, sr=stft.sr , x_axis="s",
+                    y_axis="linear")
+
+
+class MatplotVisualizationStrategy(VisualizationStrategy):
+
+    def visualize(self, stft, cmap):
+
+        plt.imshow(stft.fft_frames, cmap=cmap)
+
+class Spectrogram():
+
+    def __init__(self, stft):
+        self.stft = stft
+        self.cmap = stft.cmap
+
+        if self.cmap == "default":
+            self.strategy = RosaVisualizationStrategy()
+        else:
+            self.strategy = MatplotVisualizationStrategy()
+
+    def set_cmap(self, cmap):
+        self.cmap = cmap
+
+    def set_strategy(self, strategy="rosa"):
+
+        strategies = {
+                       "rosa": RosaVisualizationStrategy,
+                       "matplot": MatplotVisualizationStrategy
+                     }
+
+        assert strategy in strategies.keys(), "Estratégia de visualização inexistente"
+
+        self.visualizer = strategies[strategy]()
+
+    def visualize(self):
+        self.visualizer.visualize(self.stft, self.cmap)
