@@ -2,14 +2,14 @@ import React, {useEffect, useRef, useState} from "react";
 import Button from '@mui/material/Button';
 import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
-import {sendFileRequest} from "../../servicies/file";
+import {generateSpectrogram} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
 import {useImage, useSnack} from "../../hooks/useContexts";
 
 export function FileUploader() {
 
     const {setImage} = useImage()
-    const {setSnackbar} = useSnack()
+    const {setSnackbar, snackOpen, snackMessage} = useSnack()
 
     const [file, setFile] = useState( {} );
     const [isLoading, setIsLoading] = useState( false );
@@ -38,15 +38,18 @@ export function FileUploader() {
         setIsLoading(true);
 
         const data = new FormData();
+        console.log("aqui")
+        console.log(snackOpen + snackMessage)
+        setSnackbar(true, "teste")
+        console.log(snackOpen + snackMessage)
 
         // data.append("file", file, "file")
 
-        const response = sendFileRequest(data)
+        const response = generateSpectrogram(data)
 
         // setImage (response.data);
         // colocar arquivo na tela
 
-        setSnackbar(true, "teste")
     }
 
     function clearForm () {

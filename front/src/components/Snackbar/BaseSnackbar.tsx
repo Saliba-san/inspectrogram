@@ -11,12 +11,10 @@ export function BaseSnackbar() {
     }
 
     return (
-        <>
-            <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                    {snackMessage}
-                </Alert>
-            </Snackbar>
-        </>
+        <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                {snackMessage}
+            </Alert>
+        </Snackbar>
     )
 }
