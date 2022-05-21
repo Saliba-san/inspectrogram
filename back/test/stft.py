@@ -60,6 +60,7 @@ class Stft():
         self.sr = audio_signal.sr
 
         self.set_stft(audio_signal.signal)
+        return self
 
     def get_stft(self):
         assert self.fft_frames is not None, "SFTF data not defined"
