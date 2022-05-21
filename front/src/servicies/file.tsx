@@ -1,10 +1,8 @@
 import {api} from "./api";
 
-export const generateSpectrogram = async (data: FormData) => {
+export const fileUpload = async (data: FormData) => {
 
-    const headers = {'Content-Type': 'application/json'};
-
-    const response = await api.post('genspec', JSON.stringify(data), {headers: headers})
+    const response = await api.post('uploadfile', data)
         .then(res => {
             console.log("Sucesso")
             return res
@@ -18,9 +16,7 @@ export const generateSpectrogram = async (data: FormData) => {
 
 export const deleteSelectedSpectrogram = async (specId: string) => {
 
-    const headers = {'Content-Type': 'application/json'};
-
-    const response = await api.post('delspec', JSON.stringify(specId), {headers: headers})
+    const response = await api.post('delspec', JSON.stringify(specId))
         .then(res => {
             console.log("Sucesso")
             return res
@@ -34,9 +30,7 @@ export const deleteSelectedSpectrogram = async (specId: string) => {
 
 export const getSpectrogram = async (specId: string) => {
 
-    const headers = {'Content-Type': 'application/json'};
-
-    const response = await api.get('getspec/' + specId, {headers: headers})
+    const response = await api.get('getspec/' + specId)
         .then(res => {
             console.log("Sucesso")
             return res

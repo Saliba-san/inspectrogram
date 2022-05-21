@@ -7,6 +7,9 @@ import HorizontalScroll from "react-scroll-horizontal";
 import ReactCrop, {Crop} from "react-image-crop";
 import {useImage, useSnack} from "../hooks/useContexts";
 import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
+import {changeSpectogramParameter} from "../servicies/chparameter";
+
+
 
 export function Main () {
 

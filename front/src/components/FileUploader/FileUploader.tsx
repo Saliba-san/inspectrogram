@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Button from '@mui/material/Button';
 import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
-import {generateSpectrogram} from "../../servicies/file";
+import {fileUpload} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
 import {useImage, useSnack} from "../../hooks/useContexts";
 
@@ -45,7 +45,7 @@ export function FileUploader() {
 
         // data.append("file", file, "file")
 
-        const response = generateSpectrogram(data)
+        const response = fileUpload(data)
 
         // setImage (response.data);
         // colocar arquivo na tela
