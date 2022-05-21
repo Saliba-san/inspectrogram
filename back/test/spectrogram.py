@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from librosa import display as ld
 from abc import ABC, abstractmethod
 import copy
+import io
+import base64
 
 class VisualizationStrategy(ABC):
 
@@ -21,12 +23,29 @@ class RosaVisualizationStrategy(VisualizationStrategy):
                     hop_length=stft.hop_length, sr=stft.sr , x_axis="s",
                     y_axis="linear")
 
+        bytes_string = io.BytesIO()
+        plt.savefig(bytes_string, format='png')
+        bytes_string.seek(0)
+        b64_img = base64.b64encode(bytes_string.read())
+
+        plt.close()
+        return b64_img
+
 
 class MatplotVisualizationStrategy(VisualizationStrategy):
 
     def visualize(self, stft, cmap):
 
         plt.imshow(stft.fft_frames, cmap=cmap)
+
+        bytes_string = io.BytesIO()
+        plt.savefig(bytes_string, format='png')
+        bytes_string.seek(0)
+        b64_img = base64.b64encode(bytes_string.read())
+
+        plt.close()
+        return b64_img
+
 
 class Spectrogram():
 
