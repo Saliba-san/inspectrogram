@@ -1,20 +1,11 @@
 import {api} from "./api";
-
-export type ChParameterType = {
-    specid: string,
-    framelength:number,
-    window:string,
-    hoplength:number,
-    cmap: string,
-    mode: string    
-}
+import {ParametersType} from "../contexts/ParametersContext"
 
 type responseType = {
     id: string
-
 }
 
-export const changeSpectogramParameter = async (data:ChParameterType) => {
+export const changeSpectogramParameter = async (data:ParametersType) => {
 
     const response = await api.post('genspec', JSON.stringify(data))
         .then(res => {

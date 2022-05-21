@@ -4,6 +4,7 @@ import {createTheme, ThemeProvider} from "@mui/material";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {ImageContextProvider} from "./contexts/ImageContext";
 import {SnackContextProvider} from "./contexts/SnackContext";
+import { ParametersContext } from './contexts/ParametersContext';
 
 const theme = createTheme({
   palette: {
@@ -23,15 +24,17 @@ const theme = createTheme({
 function App() {
   return (
       <ThemeProvider theme={theme}>
-        <ImageContextProvider>
-          <SnackContextProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Main/>} />
-              </Routes>
-            </BrowserRouter>
-          </SnackContextProvider>
-        </ImageContextProvider>
+        <ParametersContext>
+          <ImageContextProvider>
+            <SnackContextProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Main/>} />
+                </Routes>
+              </BrowserRouter>
+            </SnackContextProvider>
+          </ImageContextProvider>
+        </ParametersContext>
       </ThemeProvider>
   );
 }
