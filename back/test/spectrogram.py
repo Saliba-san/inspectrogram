@@ -29,6 +29,7 @@ class RosaVisualizationStrategy(VisualizationStrategy):
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
+
         return b64_img
 
 
@@ -54,9 +55,9 @@ class Spectrogram():
         self.cmap = stft.cmap
 
         if self.cmap == "default":
-            self.strategy = RosaVisualizationStrategy()
+            self.visualizer = RosaVisualizationStrategy()
         else:
-            self.strategy = MatplotVisualizationStrategy()
+            self.visualizer = MatplotVisualizationStrategy()
 
     def set_cmap(self, cmap):
         self.cmap = cmap
@@ -73,4 +74,6 @@ class Spectrogram():
         self.visualizer = strategies[strategy]()
 
     def visualize(self):
-        self.visualizer.visualize(self.stft, self.cmap)
+        img = self.visualizer.visualize(self.stft, self.cmap)
+        return img
+
