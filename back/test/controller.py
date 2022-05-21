@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, request
 from flask_restful import Resource, Api
 import matplotlib.pyplot as plt
 import parameters
@@ -9,8 +9,9 @@ app = Flask("SpectrogramAPI")
 api = Api(app)
 
 class Generate_spectrogram(Resource):
-    def post(self, json_request):
+    def post(self):
 
+        json_request = request.get_json(force=True)
         json_dict = json.loads(json_request)
         parameters = StftParams().set_by_json(json_dict)
 
@@ -30,4 +31,4 @@ class Generate_spectrogram(Resource):
 api.add_resource(Generate_spectrogram, "/genspec")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8080 ,debug=True)
