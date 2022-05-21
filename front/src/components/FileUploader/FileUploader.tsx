@@ -4,9 +4,11 @@ import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
 import {sendFileRequest} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
+import {useImage} from "../../hooks/useContexts";
 
 export function FileUploader() {
 
+    const {setImage} = useImage()
     const [file, setFile] = useState( {} );
     const [isLoading, setIsLoading] = useState( false );
     const formRef = useRef<HTMLFormElement>(null);
@@ -33,6 +35,7 @@ export function FileUploader() {
 
         const response = sendFileRequest(data)
 
+        // setImage (response.data);
         // colocar arquivo na tela
 
     }
