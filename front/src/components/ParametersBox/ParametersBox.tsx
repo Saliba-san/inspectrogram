@@ -3,11 +3,18 @@ import {DialogProps, FormControl, InputLabel, Select, TextField, Typography} fro
 import React, {useState} from "react";
 import {useStyles} from "../../styles";
 import {useParameters} from "../../hooks/useContexts";
+import { ParametersType } from "../../contexts/ParametersContext";
 
 export function ParametersBox() {
 
     const {setParameters} = useParameters()
     const [framelength, setFramelength] = useState(0)
+    const [cmap, setcmap] = useState("")
+    const [hoplength, setHopelength] = useState(0)
+    const [mode, setMode] = useState("")
+    const [specid, setSpecid] = useState("")
+    const [window, setWindow] = useState("")
+
 
     const classes = useStyles();
 
@@ -16,6 +23,19 @@ export function ParametersBox() {
     function handleClose() {
         console.log("aqui")
         setOpenParam(false)
+    }
+
+    function handleSaveParameters(){
+        const param = { 
+            framelength,
+            cmap, 
+            hoplength,
+            mode,
+            specid,
+            window
+        } as ParametersType
+
+        setParameters(param) 
     }
 
     return(
