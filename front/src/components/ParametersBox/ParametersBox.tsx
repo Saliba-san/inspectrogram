@@ -14,7 +14,7 @@ import {useStyles} from "../../styles";
 import {useParameters} from "../../hooks/useContexts";
 import { ParametersType } from "../../contexts/ParametersContext";
 import {SelectList} from "../SelectList/SelectList";
-import {framelengthOption} from "../SelectList/ParametersOptions";
+import {framelengthOption, windowOption, modeOption, cmapOption, hoplenghtOption} from "../SelectList/ParametersOptions";
 
 export function ParametersBox() {
 
@@ -22,7 +22,7 @@ export function ParametersBox() {
 
     const [framelength, setFramelength] = useState("")
     const [cmap, setcmap] = useState("")
-    const [hoplength, setHopelength] = useState(0)
+    const [hoplength, setHopelength] = useState("512")
     const [mode, setMode] = useState("")
     const [specid, setSpecid] = useState("")
     const [window, setWindow] = useState("")
@@ -41,7 +41,7 @@ export function ParametersBox() {
         const param = {
             framelength: Number(framelength),
             cmap,
-            hoplength,
+            hoplength: Number(hoplength),
             mode,
             specid,
             window
@@ -64,6 +64,43 @@ export function ParametersBox() {
                     setData={(data) => setFramelength}
                     options={framelengthOption}
                 />
+
+                <SelectList
+                    label={"Tipo de Janela"}
+                    data={window}
+                    setData={(data) => setWindow}
+                    options={windowOption}
+                />
+
+                <SelectList
+                    label={"Modo"}
+                    data={mode}
+                    setData={(data) => setMode}
+                    options={modeOption}
+                />
+
+                <SelectList
+                    label={"Mapa de Cor"}
+                    data={cmap}
+                    setData={(data) => setcmap}
+                    options={cmapOption}
+                />
+
+
+                <SelectList
+                    label={"Tamanho de Passo"}
+                    data={hoplength}
+                    setData={(data) => setHopelength}
+                    options={hoplenghtOption}
+                />
+
+
+
+
+
+
+
+
 
                 <div>
                     <button

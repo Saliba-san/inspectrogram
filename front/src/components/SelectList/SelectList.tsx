@@ -30,7 +30,7 @@ export function SelectList({data, setData, options, label}: SelectListType) {
                     {
                         Object.entries(options).map(([key, value]) => {
                             return(
-                                <option value={value.title} >{value.value}</option>
+                                <option value={value.value} >{value.title}</option>
                             )
                         })}
                 </Select>
