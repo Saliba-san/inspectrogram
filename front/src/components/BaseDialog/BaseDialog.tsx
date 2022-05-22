@@ -1,13 +1,17 @@
-import {Box, Dialog, DialogContent, DialogTitle} from "@mui/material";
+import {Box, Dialog, DialogContent, DialogTitle, Grid} from "@mui/material";
 import {ReactNode} from "react";
+import {useStyles} from "../../styles";
 
 export type BaseDialogProps = {
     open: boolean,
     onClose: () => void,
-    children: ReactNode
+    children: ReactNode,
+    name: string
 }
 
 export function BaseDialog(props: BaseDialogProps) {
+
+    const classes = useStyles()
 
     return (
         <Dialog
@@ -16,13 +20,16 @@ export function BaseDialog(props: BaseDialogProps) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle>
+            <div className={classes.inputContainer}>
+                <DialogTitle style={{border: "10px", color: "#ccc8c8"}}>
+                    {props.name}
+                </DialogTitle>
                 <DialogContent>
                     <Box>
                         {props.children}
                     </Box>
                 </DialogContent>
-            </DialogTitle>
+            </div>
         </Dialog>
     );
 }

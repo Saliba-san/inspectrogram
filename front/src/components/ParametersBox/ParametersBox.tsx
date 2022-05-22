@@ -1,14 +1,26 @@
 import {BaseDialog, BaseDialogProps} from "../BaseDialog/BaseDialog";
-import {DialogProps, FormControl, InputLabel, Select, TextField, Typography} from "@mui/material";
+import {
+    DialogProps,
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    Select,
+    SelectChangeEvent,
+    TextField,
+    Typography
+} from "@mui/material";
 import React, {useState} from "react";
 import {useStyles} from "../../styles";
 import {useParameters} from "../../hooks/useContexts";
 import { ParametersType } from "../../contexts/ParametersContext";
+import {SelectList} from "../SelectList/SelectList";
+import {framelengthOption} from "../SelectList/ParametersOptions";
 
 export function ParametersBox() {
 
     const {setParameters} = useParameters()
-    const [framelength, setFramelength] = useState(0)
+
+    const [framelength, setFramelength] = useState("")
     const [cmap, setcmap] = useState("")
     const [hoplength, setHopelength] = useState(0)
     const [mode, setMode] = useState("")
@@ -26,16 +38,16 @@ export function ParametersBox() {
     }
 
     function handleSaveParameters(){
-        const param = { 
-            framelength,
-            cmap, 
+        const param = {
+            framelength: Number(framelength),
+            cmap,
             hoplength,
             mode,
             specid,
             window
         } as ParametersType
 
-        setParameters(param) 
+        setParameters(param)
     }
 
     return(
@@ -43,25 +55,25 @@ export function ParametersBox() {
             <BaseDialog
                 open={openParam}
                 onClose={handleClose}
+                name={"Parâmetros de execução"}
             >
-                <FormControl>
-                    <InputLabel>Tamanho do quadro</InputLabel>
-                    <Select
-                        native
-                        value={framelength}
-                    >
 
-                    </Select>
-                </FormControl>
-
+                <SelectList
+                    label={"Largura de Quadro"}
+                    data={framelength}
+                    setData={(data) => setFramelength}
+                    options={framelengthOption}
+                />
 
                 <div>
                     <button
+                        className={classes.paramButton}
                     >
                         Salvar
                     </button>
                     <button
                         onClick={() => setOpenParam(false)}
+                        className={classes.paramButton}
                     >
                         Fechar
                     </button>

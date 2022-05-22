@@ -62,5 +62,24 @@ export const useStyles = makeStyles({
     },
     formContainer: {
         width: "30%"
-    }
+    },
+    inputContainer: {
+        background: "#3b3939",
+    },
+    paramInput: {
+        padding: 5,
+        colorScheme: "#ccc8c8"
+    },
+    paramButton: {
+        fontWeight: 400,
+        borderRadius: 5,
+        height: 30,
+        paddingRight: 10,
+        paddingLeft: 10,
+        color: "#9A4AECFF",
+        background: "transparent",
+        border: "transparent",
+        marginRight:10,
+        fontSize: "1rem"
+    },
 })
