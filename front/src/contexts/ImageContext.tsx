@@ -2,7 +2,6 @@ import {createContext, ReactNode, useState} from "react";
 
 export type Image = {
     data: string,
-    length: number,
     imageid: string
 }
 

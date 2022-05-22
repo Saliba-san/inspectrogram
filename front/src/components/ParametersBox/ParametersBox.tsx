@@ -46,14 +46,15 @@ export function ParametersBox() {
             cmap,
             hoplength: Number(hoplength),
             mode,
-            specid: "",
+            specid: "file",
             window
         } as ParametersType
-
         console.log(param)
+
         setParameters(param)
 
         setSnackbar(true, "Parâmetros atualizados", "info")
+
         handleClose()
 
     }

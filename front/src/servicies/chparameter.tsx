@@ -1,10 +1,6 @@
 import {api} from "./api";
 import {ParametersType} from "../contexts/ParametersContext"
 
-type responseType = {
-    id: string
-}
-
 export const changeSpectogramParameter = async (data:ParametersType) => {
 
     const response = await api.post('genspec', JSON.stringify(data))
@@ -15,7 +11,7 @@ export const changeSpectogramParameter = async (data:ParametersType) => {
         .catch(err => {
             console.log("Erro")
             return err
-        }) as responseType
-    return response;
+        }) as ResponseType;
+    return response
 }
 

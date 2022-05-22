@@ -1,5 +1,14 @@
 import {api} from "./api";
 
+export type UploadResponseType = {
+    data: {
+        data: string,
+        id: string
+    },
+    status: number,
+    statusText: string
+}
+
 export const fileUpload = async (data: FormData) => {
 
     const response = await api.post('uploadfile', data)
@@ -11,7 +20,11 @@ export const fileUpload = async (data: FormData) => {
             console.log("Erro")
             return err
         })
-    return response;
+    return {
+        data: response.data,
+        status: response.status,
+        statusText: response.statusText
+    } as UploadResponseType
 }
 
 export const deleteSelectedSpectrogram = async (specId: string) => {
@@ -24,8 +37,8 @@ export const deleteSelectedSpectrogram = async (specId: string) => {
         .catch(err => {
             console.log("Erro")
             return err
-        })
-    return response;
+        }) as ResponseType
+    return response
 }
 
 export const getSpectrogram = async (specId: string) => {

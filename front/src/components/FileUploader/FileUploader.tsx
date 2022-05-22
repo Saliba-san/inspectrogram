@@ -5,13 +5,15 @@ import {useStyles} from "../../styles";
 import {fileUpload} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
 import {useImage, useSnack} from "../../hooks/useContexts";
+import {Image} from "../../contexts/ImageContext";
+
 
 export function FileUploader() {
 
     const {setImage} = useImage()
     const {setSnackbar, snackData} = useSnack()
 
-    const [file, setFile] = useState( {} );
+    const [file, setFile] = useState( new Blob() );
     const [isLoading, setIsLoading] = useState( false );
     const [blockDelete, setBlockDelete] = useState(true)
     const formRef = useRef<HTMLFormElement>(null);
@@ -27,7 +29,7 @@ export function FileUploader() {
             console.log("Nenhum arquivo válido encontrado.")
         }
 
-        if(file !== {}){
+        if(file !== null){
             setBlockDelete(false)
         }
     }
@@ -38,19 +40,23 @@ export function FileUploader() {
         setIsLoading(true);
 
         const data = new FormData();
-        console.log("aqui")
-        console.log(snackData.open)
-        console.log(snackData.message)
-        setSnackbar(true, "teste", "success")
-        console.log(snackData.open)
-        console.log(snackData.message)
 
-        // data.append("file", file, "file")
+        data.append("file", file, "file")
 
-        const response = fileUpload(data)
+        fileUpload(data)
+            .then( async res => {
+                console.log(res)
+                setSnackbar(true, "Arquivo enviado", "success")
 
-        // setImage (response.data);
-        // colocar arquivo na tela
+            })
+            .catch( async err => {
+                setSnackbar(true, err.data, "error")
+            })
+
+
+        setIsLoading(false)
+        setFile(new Blob())
+        setBlockDelete(true)
 
     }
 
@@ -58,7 +64,7 @@ export function FileUploader() {
         if(formRef.current !== null)
             formRef.current.reset();
         setIsLoading(false)
-        setFile({})
+        setFile(new Blob())
         setBlockDelete(true)
     }
 
