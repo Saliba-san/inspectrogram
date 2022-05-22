@@ -24,17 +24,15 @@ const theme = createTheme({
 function App() {
   return (
       <ThemeProvider theme={theme}>
-        <ParametersContext>
-          <ImageContextProvider>
-            <SnackContextProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Main/>} />
-                </Routes>
-              </BrowserRouter>
-            </SnackContextProvider>
-          </ImageContextProvider>
-        </ParametersContext>
+        <ImageContextProvider>
+          <SnackContextProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Main/>} />
+              </Routes>
+            </BrowserRouter>
+          </SnackContextProvider>
+        </ImageContextProvider>
       </ThemeProvider>
   );
 }

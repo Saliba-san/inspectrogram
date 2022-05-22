@@ -17,6 +17,7 @@ type ImageContextTypeProviderPorps = {
 }
 
 export function ImageContextProvider (props: ImageContextTypeProviderPorps) {
+
     const [image, setImage] = useState<Image>()
 
     async function setImageData (data: Image) {

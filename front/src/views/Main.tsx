@@ -3,20 +3,18 @@ import {useStyles} from "../styles";
 import {FileUploader} from "../components/FileUploader/FileUploader";
 import {Box, Container, Grid, Paper, Slider, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
-import HorizontalScroll from "react-scroll-horizontal";
 import ReactCrop, {Crop} from "react-image-crop";
 import {useImage, useSnack} from "../hooks/useContexts";
 import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
-import {changeSpectogramParameter} from "../servicies/chparameter";
+import {ParametersBox} from "../components/ParametersBox/ParametersBox";
 
 
 
 export function Main () {
 
-    // Armazena uma String com o .svg da imagem
     const [spectogram, setSpectogram] = useState("")
-    // Armazena o Id da imagem para comunicação com o Back
     const [spectogramId, setSpectogramId] = useState("")
+
 
     const {image} = useImage();
 
@@ -50,7 +48,6 @@ export function Main () {
                     <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
                         - Inspecione suas músicas aqui -
                     </Typography>
-                    <BaseSnackbar/>
                 </Grid>
                 <Grid
                     container
@@ -64,7 +61,7 @@ export function Main () {
                             <img src={pic} />
                         </ReactCrop>
                     </Paper>
-                    <Slider/>
+                    {/*<Slider/>*/}
 
                 </Grid>
                 <Grid
@@ -76,7 +73,10 @@ export function Main () {
                     <FileUploader/>
 
                 </Grid>
+                <ParametersBox />
+
             </Grid>
+            <BaseSnackbar/>
         </React.Fragment>
     );
 }

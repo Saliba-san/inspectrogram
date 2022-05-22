@@ -9,7 +9,7 @@ import {useImage, useSnack} from "../../hooks/useContexts";
 export function FileUploader() {
 
     const {setImage} = useImage()
-    const {setSnackbar, snackOpen, snackMessage} = useSnack()
+    const {setSnackbar, snackData} = useSnack()
 
     const [file, setFile] = useState( {} );
     const [isLoading, setIsLoading] = useState( false );
@@ -39,9 +39,11 @@ export function FileUploader() {
 
         const data = new FormData();
         console.log("aqui")
-        console.log(snackOpen + snackMessage)
-        setSnackbar(true, "teste")
-        console.log(snackOpen + snackMessage)
+        console.log(snackData.open)
+        console.log(snackData.message)
+        setSnackbar(true, "teste", "success")
+        console.log(snackData.open)
+        console.log(snackData.message)
 
         // data.append("file", file, "file")
 
