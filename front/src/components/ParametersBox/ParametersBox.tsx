@@ -57,12 +57,11 @@ export function ParametersBox() {
                 onClose={handleClose}
                 name={"Parâmetros de execução"}
             >
-
                 <SelectList
-                    label={"Largura de Quadro"}
-                    data={framelength}
-                    setData={(data) => setFramelength}
-                    options={framelengthOption}
+                    label={"Modo"}
+                    data={mode}
+                    setData={(data) => setMode}
+                    options={modeOption}
                 />
 
                 <SelectList
@@ -73,10 +72,17 @@ export function ParametersBox() {
                 />
 
                 <SelectList
-                    label={"Modo"}
-                    data={mode}
-                    setData={(data) => setMode}
-                    options={modeOption}
+                    label={"Largura de Quadro"}
+                    data={framelength}
+                    setData={(data) => setFramelength}
+                    options={framelengthOption}
+                />
+
+                <SelectList
+                    label={"Tamanho de Passo"}
+                    data={hoplength}
+                    setData={(data) => setHopelength}
+                    options={hoplenghtOption}
                 />
 
                 <SelectList
@@ -86,14 +92,6 @@ export function ParametersBox() {
                     options={cmapOption}
                 />
 
-
-                <SelectList
-                    label={"Tamanho de Passo"}
-                    data={hoplength}
-                    setData={(data) => setHopelength}
-                    options={hoplenghtOption}
-                />
-                
                 <div>
                     <button
                         className={classes.paramButton}
