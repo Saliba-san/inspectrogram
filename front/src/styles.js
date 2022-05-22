@@ -21,7 +21,8 @@ export const useStyles = makeStyles({
         color: "#ccc8c8",
         background: "#9A4AECFF",
         border: 0,
-        marginRight:10
+        marginRight:10,
+        width: "50%"
     },
     botaoCancelar: {
         fontWeight: 800,
@@ -37,6 +38,7 @@ export const useStyles = makeStyles({
     },
     formGroup: {
         marginBottom: 10,
+
     },
     formControl: {
         width: '100%',
@@ -52,5 +54,38 @@ export const useStyles = makeStyles({
         width: "80vw",
         height: "50vh",
         overflowY: "scroll"
+    },
+    loadingContainer: {
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column"
+    },
+    formContainer: {
+        width: "30%"
+    },
+    inputContainer: {
+        background: "#3b3939",
+    },
+    paramInput: {
+        padding: 5,
+        colorScheme: "#ccc8c8"
+    },
+    paramButton: {
+        fontWeight: 400,
+        borderRadius: 5,
+        height: 30,
+        paddingRight: 10,
+        paddingLeft: 10,
+        color: "#9A4AECFF",
+        background: "transparent",
+        border: "transparent",
+        marginRight:10,
+        fontSize: "1rem"
+    },
+    settingButton: {
+        borderRadius: 100,
+        background: "transparent",
+        color: "#ccc8c8",
+        marginTop: "2rem"
     }
 })
