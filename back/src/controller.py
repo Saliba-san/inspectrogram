@@ -24,9 +24,8 @@ class Generate_spectrogram(Resource):
         print(audio_id)
 
         print("#########################")
-        audio_file_path = Musics.query.filter_by(id=audio_id)[0]["path"]
-        print(audio_file_path)
-        audio_file_path = "../test/audios/ronnie.wav"
+        musics = Musics.query.filter_by(id=audio_id)
+        audio_file_path = musics_schema.dump(musics)[0]["path"]
 
         audio = AudioSignal(audio_file_path=audio_file_path)
 
