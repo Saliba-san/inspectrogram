@@ -19,8 +19,9 @@ export type ParametersType = {
     mode: string   
 }
 
+
 type ParametersContextType ={
-    parameters: ParametersType | undefined,
+    parameters: ParametersType,
     setParameters: (Parameters:ParametersType) => void     
 }
 

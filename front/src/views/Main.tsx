@@ -4,18 +4,18 @@ import {FileUploader} from "../components/FileUploader/FileUploader";
 import {Box, Container, Grid, Paper, Slider, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
 import ReactCrop, {Crop} from "react-image-crop";
-import {useImage, useSnack} from "../hooks/useContexts";
+import {useImage, useParameters, useSnack} from "../hooks/useContexts";
 import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
 import {ParametersBox} from "../components/ParametersBox/ParametersBox";
 import {Settings, PlayArrow} from "@mui/icons-material";
-
+import {changeSpectogramParameter} from "../servicies/chparameter"
 
 
 export function Main () {
 
     const [spectogram, setSpectogram] = useState("")
     const [spectogramId, setSpectogramId] = useState("")
-
+    const {parameters} = useParameters()
 
     const {image} = useImage();
 
@@ -30,7 +30,8 @@ export function Main () {
     const classes = useStyles();
 
     function handleCreateNewSpec() {
-
+        const response = changeSpectogramParameter(parameters) 
+        console.log(response)
     }
 
     return (
@@ -79,7 +80,9 @@ export function Main () {
                                 handleCreateNewSpec()
                             }}
                         >
-                            <PlayArrow/>
+                            <PlayArrow/>                      
+                        
+                        
                         </button>
                     </Grid>
                 </Grid>

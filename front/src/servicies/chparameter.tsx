@@ -18,3 +18,4 @@ export const changeSpectogramParameter = async (data:ParametersType) => {
         }) as responseType
     return response;
 }
+
