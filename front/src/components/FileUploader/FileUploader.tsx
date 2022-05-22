@@ -33,13 +33,16 @@ export function FileUploader() {
             setBlockDelete(false)
         }
     }
-
+    
     function submitFile(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-
+        
         setIsLoading(true);
-
+        
         const data = new FormData();
+        
+        console.log(file)
+        data.append("file", file)
 
         data.append("file", file, "file")
 
@@ -57,6 +60,7 @@ export function FileUploader() {
         setIsLoading(false)
         setFile(new Blob())
         setBlockDelete(true)
+
 
     }
 

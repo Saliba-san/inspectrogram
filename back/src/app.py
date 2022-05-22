@@ -8,7 +8,9 @@ from flask_cors import CORS
 # Order matters: Initialize SQLAlchemy before Marshmallow
 db = SQLAlchemy()
 ma = Marshmallow()
-cors = CORS()
+
+UPLOAD_FOLDER = 'files'
+ALLOWED_EXTENSIONS = {'mp3', 'mp4', 'wma', 'wav', 'ogg', 'opus'}
 
 
 def create_app():
@@ -16,9 +18,9 @@ def create_app():
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/database.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     db.init_app(app)
     ma.init_app(app)
-    cors.init_app(app)
-
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
     return app

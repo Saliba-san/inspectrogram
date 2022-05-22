@@ -43,7 +43,7 @@ export const deleteSelectedSpectrogram = async (specId: string) => {
 
 export const getSpectrogram = async (specId: string) => {
 
-    const response = await api.get('getspec/' + specId)
+
         .then(res => {
             console.log("Sucesso")
             return res
