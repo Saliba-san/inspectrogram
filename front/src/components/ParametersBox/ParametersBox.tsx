@@ -93,15 +93,7 @@ export function ParametersBox() {
                     setData={(data) => setHopelength}
                     options={hoplenghtOption}
                 />
-
-
-
-
-
-
-
-
-
+                
                 <div>
                     <button
                         className={classes.paramButton}
