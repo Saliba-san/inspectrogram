@@ -38,6 +38,10 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
     def visualize(self, stft, cmap):
 
         plt.imshow(stft.fft_frames, cmap=cmap)
+        plt.xlabel("")
+        plt.ylabel("")
+        plt.xticks([])
+        plt.yticks([])
 
         bytes_string = io.BytesIO()
         plt.savefig(bytes_string, format='png')
