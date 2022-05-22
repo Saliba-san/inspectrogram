@@ -2,7 +2,8 @@ import {createContext, ReactNode, useState} from "react";
 
 export type Image = {
     data: string,
-    length: number
+    length: number,
+    imageid: string
 }
 
 type ImageContextType = {

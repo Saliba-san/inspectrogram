@@ -1,9 +1,12 @@
 import {Alert, Snackbar} from "@mui/material";
 import {useSnack} from "../../hooks/useContexts";
 import {SnackbarType} from "../../contexts/SnackContext";
+import {useStyles} from "../../styles";
 
 
 export function BaseSnackbar() {
+
+    const classes = useStyles();
 
     const {snackData, setSnackbar} = useSnack()
 

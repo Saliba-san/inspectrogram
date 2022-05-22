@@ -82,4 +82,10 @@ export const useStyles = makeStyles({
         marginRight:10,
         fontSize: "1rem"
     },
+    settingButton: {
+        borderRadius: 100,
+        background: "transparent",
+        color: "#ccc8c8",
+        marginTop: "2rem"
+    }
 })

@@ -15,20 +15,20 @@ import {useParameters} from "../../hooks/useContexts";
 import { ParametersType } from "../../contexts/ParametersContext";
 import {SelectList} from "../SelectList/SelectList";
 import {framelengthOption, windowOption, modeOption, cmapOption, hoplenghtOption} from "../SelectList/ParametersOptions";
+import {Settings} from "@mui/icons-material"
+
 
 export function ParametersBox() {
 
+    const classes = useStyles();
+
     const {setParameters} = useParameters()
 
-    const [framelength, setFramelength] = useState("")
-    const [cmap, setcmap] = useState("")
+    const [framelength, setFramelength] = useState("256")
+    const [cmap, setCmap] = useState("hann")
     const [hoplength, setHopelength] = useState("512")
-    const [mode, setMode] = useState("")
-    const [specid, setSpecid] = useState("")
-    const [window, setWindow] = useState("")
-
-
-    const classes = useStyles();
+    const [mode, setMode] = useState("power")
+    const [window, setWindow] = useState("viridis")
 
     const [openParam, setOpenParam] = useState(false)
 
@@ -37,16 +37,20 @@ export function ParametersBox() {
         setOpenParam(false)
     }
 
+    /**
+     * TODO concertar ID
+     */
     function handleSaveParameters(){
         const param = {
             framelength: Number(framelength),
             cmap,
             hoplength: Number(hoplength),
             mode,
-            specid,
+            specid: "",
             window
         } as ParametersType
 
+        console.log(param)
         setParameters(param)
     }
 
@@ -61,49 +65,37 @@ export function ParametersBox() {
                 <SelectList
                     label={"Largura de Quadro"}
                     data={framelength}
-                    setData={(data) => setFramelength}
+                    setData={(data) => setFramelength(data)}
                     options={framelengthOption}
                 />
-
                 <SelectList
                     label={"Tipo de Janela"}
                     data={window}
-                    setData={(data) => setWindow}
+                    setData={(data) => setWindow(data)}
                     options={windowOption}
                 />
-
                 <SelectList
                     label={"Modo"}
                     data={mode}
-                    setData={(data) => setMode}
+                    setData={(data) => setMode(data)}
                     options={modeOption}
                 />
-
                 <SelectList
                     label={"Mapa de Cor"}
                     data={cmap}
-                    setData={(data) => setcmap}
+                    setData={(data) => setCmap(data)}
                     options={cmapOption}
                 />
-
-
                 <SelectList
                     label={"Tamanho de Passo"}
                     data={hoplength}
-                    setData={(data) => setHopelength}
+                    setData={(data) => setHopelength(data)}
                     options={hoplenghtOption}
                 />
 
-
-
-
-
-
-
-
-
                 <div>
                     <button
+                        onClick={() => handleSaveParameters()}
                         className={classes.paramButton}
                     >
                         Salvar
@@ -117,12 +109,12 @@ export function ParametersBox() {
                 </div>
             </BaseDialog>
             <button
-                className={classes.botaoEnviar}
+                className={classes.settingButton}
                 onClick={() => {
                     setOpenParam(true)
                 }}
             >
-                Mudar parâmetros
+                <Settings/>
             </button>
         </div>
     )

@@ -21,6 +21,7 @@ export const framelengthOption = {
     }
 }
 
+
 export const windowOption = {
     "Hann": {
         title: "Hann",

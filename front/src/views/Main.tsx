@@ -34,6 +34,7 @@ export function Main () {
                 className={classes.mainContainer}
                 container
                 direction="row"
+                justifyContent={"space-evenly"}
                 xs={12} md={12} lg={12} xl={12}
             >
                 <Grid
@@ -51,18 +52,24 @@ export function Main () {
                 </Grid>
                 <Grid
                     container
-                    alignItems="center"
-                    direction="column"
+                    alignItems="top"
+                    direction="row"
+                    justifyContent={"space-evenly"}
                     xs={12} md={12} lg={12} xl={12}
                 >
+                    <ParametersBox />
                     <Paper className={classes.specContainer}>
-
                         <ReactCrop crop={crop} onChange={c => setCrop(c)}>
                             <img src={pic} />
                         </ReactCrop>
                     </Paper>
-                    {/*<Slider/>*/}
+                    <Grid
+                        direction="row"
+                        justifyContent={"space-evenly"}
+                    >
+                        <ParametersBox />
 
+                    </Grid>
                 </Grid>
                 <Grid
                     container
@@ -73,8 +80,6 @@ export function Main () {
                     <FileUploader/>
 
                 </Grid>
-                <ParametersBox />
-
             </Grid>
             <BaseSnackbar/>
         </React.Fragment>
