@@ -61,7 +61,6 @@ export function ParametersBox() {
                 onClose={handleClose}
                 name={"Parâmetros de execução"}
             >
-
                 <SelectList
                     label={"Largura de Quadro"}
                     data={framelength}
