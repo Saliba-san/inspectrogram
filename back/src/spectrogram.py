@@ -25,7 +25,7 @@ class RosaVisualizationStrategy(VisualizationStrategy):
                     y_axis="linear")
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png', dpi=800)
+        plt.savefig(bytes_string, format='png', dpi=1800)
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
@@ -45,7 +45,7 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
         plt.yticks([])
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png', dpi=800)
+        plt.savefig(bytes_string, format='png', dpi=1800)
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
