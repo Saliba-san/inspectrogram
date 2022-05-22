@@ -7,6 +7,7 @@ import ReactCrop, {Crop} from "react-image-crop";
 import {useImage, useSnack} from "../hooks/useContexts";
 import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
 import {ParametersBox} from "../components/ParametersBox/ParametersBox";
+import {Settings, PlayArrow} from "@mui/icons-material";
 
 
 
@@ -27,6 +28,10 @@ export function Main () {
     })
 
     const classes = useStyles();
+
+    function handleCreateNewSpec() {
+
+    }
 
     return (
         <React.Fragment>
@@ -68,7 +73,14 @@ export function Main () {
                         justifyContent={"space-evenly"}
                     >
                         <ParametersBox />
-
+                        <button
+                            className={classes.settingButton}
+                            onClick={() => {
+                                handleCreateNewSpec()
+                            }}
+                        >
+                            <PlayArrow/>
+                        </button>
                     </Grid>
                 </Grid>
                 <Grid

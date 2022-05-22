@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import React, {useState} from "react";
 import {useStyles} from "../../styles";
-import {useParameters} from "../../hooks/useContexts";
+import {useParameters, useSnack} from "../../hooks/useContexts";
 import { ParametersType } from "../../contexts/ParametersContext";
 import {SelectList} from "../SelectList/SelectList";
 import {framelengthOption, windowOption, modeOption, cmapOption, hoplenghtOption} from "../SelectList/ParametersOptions";
@@ -23,6 +23,7 @@ export function ParametersBox() {
     const classes = useStyles();
 
     const {setParameters} = useParameters()
+    const {setSnackbar} = useSnack()
 
     const [framelength, setFramelength] = useState("256")
     const [cmap, setCmap] = useState("hann")
@@ -33,7 +34,6 @@ export function ParametersBox() {
     const [openParam, setOpenParam] = useState(false)
 
     function handleClose() {
-        console.log("aqui")
         setOpenParam(false)
     }
 
@@ -52,6 +52,10 @@ export function ParametersBox() {
 
         console.log(param)
         setParameters(param)
+
+        setSnackbar(true, "Parâmetros atualizados", "info")
+        handleClose()
+
     }
 
     return(
