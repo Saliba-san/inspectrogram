@@ -1,9 +1,10 @@
-from flask import Flask, send_file, request
+from flask import Flask, request
 from flask_restful import Resource, Api
-import matplotlib.pyplot as plt
-import parameters
-import librosa as rosa
 import json
+from parameters import StftParams
+from audio import AudioSignal
+from stft import Stft
+from spectrogram import Spectrogram
 
 app = Flask("SpectrogramAPI")
 api = Api(app)
@@ -11,8 +12,7 @@ api = Api(app)
 class Generate_spectrogram(Resource):
     def post(self):
 
-        json_request = request.get_json(force=True)
-        json_dict = json.loads(json_request)
+        json_dict = request.get_json(force=True)
         parameters = StftParams().set_by_json(json_dict)
 
         audio = AudioSignal("./audio.wav")
@@ -23,7 +23,8 @@ class Generate_spectrogram(Resource):
 
         data = {}
         data['id'] = '1'
-        data['image'] = b64_img
+        data['image'] = str(b64_img)
+
         json_response = json.dumps(data)
 
         return json_response
