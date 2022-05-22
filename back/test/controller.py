@@ -29,7 +29,21 @@ class Generate_spectrogram(Resource):
 
         return json_response
 
+class UploadAudio(Resource):
+    def post(self):
+        json_dict = request.get_json(force=True)
+
+        with open("audio_uploaded.b64", "+w") as file:
+            file.write(json_dict['file'])
+
+        data = {}
+        data['id'] = '1'
+        json_response = json.dumps(data)
+        return json_response
+
+
 api.add_resource(Generate_spectrogram, "/genspec")
+api.add_resource(UploadAudio, "/uploadaudio")
 
 if __name__ == "__main__":
     app.run(port=8080 ,debug=True)
