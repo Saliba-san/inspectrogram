@@ -4,6 +4,7 @@ from app import create_app,db, UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 from models import Musics,musics_schema,Images,images_schema
 from werkzeug.utils import secure_filename
 from tinytag import TinyTag
+import numpy as np
 
 
 # Create an application instance
@@ -18,11 +19,13 @@ def allowed_file(filename):
 
 @app.route("/musics", methods=["GET"], strict_slashes=False)
 def musics():
+    musics = Musics.query.all()
+    results = musics_schema.dump(musics)
+    #ids = [dict['id'] for dict in results]
+    #idxs = (np.where(ids) == id)
 
-	musics = Musics.query.all()
-	results = musics_schema.dump(musics)
-
-	return jsonify(results)
+    #path = np.array(results)[idxs]['path']
+    return (jsonify(results))
 
 @app.route("/musics-post", methods=["GET","POST"], strict_slashes=False)
 def musics_post():
