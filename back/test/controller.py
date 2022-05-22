@@ -15,7 +15,13 @@ class Generate_spectrogram(Resource):
         json_dict = request.get_json(force=True)
         parameters = StftParams().set_by_json(json_dict)
 
-        audio = AudioSignal("./audio.wav")
+        # audio_id = json_dict["specId"]
+        # audio_file_path = db_get_audio_by_id(audio_id)
+
+        audio_file_path = "audios/ronnie.wav"
+
+        audio = AudioSignal(audio_file_path=audio_file_path)
+
         stft = Stft(parameters).set_stft_from_audio(audio)
 
         spectrogram = Spectrogram(stft)
@@ -29,21 +35,7 @@ class Generate_spectrogram(Resource):
 
         return json_response
 
-class UploadAudio(Resource):
-    def post(self):
-        json_dict = request.get_json(force=True)
-
-        with open("audio_uploaded.b64", "+w") as file:
-            file.write(json_dict['file'])
-
-        data = {}
-        data['id'] = '1'
-        json_response = json.dumps(data)
-        return json_response
-
-
 api.add_resource(Generate_spectrogram, "/genspec")
-api.add_resource(UploadAudio, "/uploadaudio")
 
 if __name__ == "__main__":
     app.run(port=8080 ,debug=True)
