@@ -3,13 +3,13 @@ import {useStyles} from "../styles";
 import {FileUploader} from "../components/FileUploader/FileUploader";
 import {Box, Container, Grid, Paper, Slider, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
-import ReactCrop, {Crop} from "react-image-crop";
 import {useImage, useParameters, useSnack} from "../hooks/useContexts";
 import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
 import {ParametersBox} from "../components/ParametersBox/ParametersBox";
 import {Settings, PlayArrow} from "@mui/icons-material";
 import {changeSpectogramParameter} from "../servicies/chparameter"
 import {MusicList} from "../components/MusicList/MusicList";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 
 export function Main () {
@@ -17,15 +17,7 @@ export function Main () {
     const {parameters} = useParameters()
 
     const {image} = useImage();
-
-    const [crop, setCrop] = useState<Crop>({
-        unit: '%', // Can be 'px' or '%'
-        x: 25,
-        y: 25,
-        width: 50,
-        height: 50
-    })
-
+    
     const classes = useStyles();
 
     function handleCreateNewSpec() {
@@ -64,9 +56,11 @@ export function Main () {
                 >
                     <MusicList />
                     <Paper className={classes.specContainer}>
-                        <ReactCrop crop={crop} onChange={c => setCrop(c)}>
-                            <img src={pic} />
-                        </ReactCrop>
+                        <TransformWrapper>
+                            <TransformComponent>
+                                <   img src={pic} />
+                            </TransformComponent>
+                        </TransformWrapper>
                     </Paper>
                     <Grid
                         direction="row"
