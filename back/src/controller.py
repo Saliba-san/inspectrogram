@@ -23,7 +23,6 @@ api = Api(app)
 
 app.secret_key = 'bcyiae7doqbucmopighyi'
 
-
 class Generate_spectrogram(Resource):
     def post(self):
 
@@ -43,13 +42,9 @@ class Generate_spectrogram(Resource):
         spectrogram = Spectrogram(stft)
         b64_img = spectrogram.visualize()
 
-        data = {}
-        data['id'] = '1'
-        data['image'] = str(b64_img)
+        img = str(b64_img)
 
-        json_response = json.dumps(data)
-
-        return json_response
+        return img
 
 api.add_resource(Generate_spectrogram, "/genspec")
 
@@ -82,7 +77,7 @@ def musics_post():
 		new_music = Musics(music=name, artist=artist, path=path)
 		db.session.add(new_music)
 		db.session.commit()
-	
+
 	musics = Musics.query.all()
 	results = musics_schema.dump(musics)
 	return jsonify(results)
