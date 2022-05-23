@@ -1,17 +1,17 @@
 import {api} from "./api";
+import {Musica} from "../contexts/MusicasContext";
 
 export type UploadResponseType = {
-    data: {
-        data: string,
-        id: string
-    },
+    data: Musica[]
     status: number,
     statusText: string
 }
 
 export const fileUpload = async (data: FormData) => {
 
-    const response = await api.post('uploadfile', data)
+    const headers = {'Content-Type': `multipart/form-data`};
+
+    const response = await api.post('uploadfile', data, {headers: headers})
         .then(res => {
             console.log("Sucesso")
             return res
@@ -43,7 +43,7 @@ export const deleteSelectedSpectrogram = async (specId: string) => {
 
 export const getSpectrogram = async (specId: string) => {
 
-
+    const response = await api.get('getspec/' + specId)
         .then(res => {
             console.log("Sucesso")
             return res

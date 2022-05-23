@@ -2,6 +2,7 @@ import {useContext} from "react";
 import {ImageContext} from "../contexts/ImageContext";
 import { ParametersContext } from "../contexts/ParametersContext";
 import {SnackbarContext} from "../contexts/SnackContext";
+import {MusicContext} from "../contexts/MusicasContext";
 
 export function  useImage () {
     const value = useContext(ImageContext)
@@ -15,5 +16,10 @@ export function useSnack () {
 
 export function useParameters () {
     const value = useContext(ParametersContext)
+    return value
+}
+
+export function useMusica () {
+    const value = useContext(MusicContext)
     return value
 }

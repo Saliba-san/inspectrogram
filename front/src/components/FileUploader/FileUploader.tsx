@@ -4,7 +4,7 @@ import {Grid, Typography} from "@mui/material";
 import {useStyles} from "../../styles";
 import {fileUpload} from "../../servicies/file";
 import { CircularProgress } from '@mui/material';
-import {useImage, useSnack} from "../../hooks/useContexts";
+import {useImage, useMusica, useSnack} from "../../hooks/useContexts";
 import {Image} from "../../contexts/ImageContext";
 
 
@@ -12,8 +12,10 @@ export function FileUploader() {
 
     const {setImage} = useImage()
     const {setSnackbar, snackData} = useSnack()
+    const {musicas, setMusics} = useMusica()
 
-    const [file, setFile] = useState( new Blob() );
+    // const [file, setFile] = useState({file: {}, name: ""} );
+    const [file, setFile] = useState(new Blob);
     const [isLoading, setIsLoading] = useState( false );
     const [blockDelete, setBlockDelete] = useState(true)
     const formRef = useRef<HTMLFormElement>(null);
@@ -21,7 +23,6 @@ export function FileUploader() {
 
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files)
 
         if(e.target.files) {
             setFile(e.target.files[0]);
@@ -40,17 +41,17 @@ export function FileUploader() {
         setIsLoading(true);
         
         const data = new FormData();
-        
+
         console.log(file)
         data.append("file", file)
-
-        data.append("file", file, "file")
+        console.log(data)
 
         fileUpload(data)
             .then( async res => {
-                console.log(res)
                 setSnackbar(true, "Arquivo enviado", "success")
+                await setMusics(res.data)
 
+                console.log(musicas)
             })
             .catch( async err => {
                 setSnackbar(true, err.data, "error")
@@ -58,7 +59,7 @@ export function FileUploader() {
 
 
         setIsLoading(false)
-        setFile(new Blob())
+        setFile(new Blob() )
         setBlockDelete(true)
 
 
@@ -68,7 +69,7 @@ export function FileUploader() {
         if(formRef.current !== null)
             formRef.current.reset();
         setIsLoading(false)
-        setFile(new Blob())
+        setFile(new Blob() )
         setBlockDelete(true)
     }
 
