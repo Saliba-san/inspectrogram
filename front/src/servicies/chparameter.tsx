@@ -1,5 +1,14 @@
 import {api} from "./api";
 import {ParametersType} from "../contexts/ParametersContext"
+import {UploadResponseType} from "./file";
+import {Musica} from "../contexts/MusicasContext";
+
+export type SpecResponse = {
+    data: string,
+    status: number,
+    statusText: string
+}
+
 
 export const changeSpectogramParameter = async (data: ParametersType) => {
 
@@ -13,7 +22,11 @@ export const changeSpectogramParameter = async (data: ParametersType) => {
         .catch(err => {
             console.log("Erro")
             return err
-        }) as ResponseType;
-    return response
+        }) as SpecResponse;
+    return {
+        data: response.data,
+        status: response.status,
+        statusText: response.statusText
+    } as SpecResponse
 }
 

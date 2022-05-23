@@ -30,8 +30,6 @@ export function MusicList() {
 
     const classes = useStyles();
 
-    const {setParameters} = useParameters()
-    const {setSnackbar} = useSnack()
     const {musicas} = useMusica()
 
     const [musicid, setMusicid] = useState(0)

@@ -10,13 +10,14 @@ import {ParametersBox} from "../components/ParametersBox/ParametersBox";
 import {Settings, PlayArrow} from "@mui/icons-material";
 import {changeSpectogramParameter} from "../servicies/chparameter"
 import {MusicList} from "../components/MusicList/MusicList";
+import {Image} from "../contexts/ImageContext";
 
 
 export function Main () {
 
     const {parameters} = useParameters()
 
-    const {image} = useImage();
+    const {image, setImage} = useImage();
 
     const [crop, setCrop] = useState<Crop>({
         unit: '%', // Can be 'px' or '%'
@@ -29,8 +30,18 @@ export function Main () {
     const classes = useStyles();
 
     function handleCreateNewSpec() {
-        const response = changeSpectogramParameter(parameters) 
-        console.log(response)
+        const response =  changeSpectogramParameter(parameters)
+            .then( res => {
+
+                const image = {
+                    data: "data:image/png;base64," + res.data,
+                    imageid: "1"
+                }as Image
+                console.log(image)
+
+                setImage(image)
+            })
+
     }
 
     return (
@@ -65,7 +76,12 @@ export function Main () {
                     <MusicList />
                     <Paper className={classes.specContainer}>
                         <ReactCrop crop={crop} onChange={c => setCrop(c)}>
-                            <img src={pic} />
+                            {
+                                image === undefined ?
+                                    <>Vazio</>
+                                    :
+                                    <img src={image.data} />
+                            }
                         </ReactCrop>
                     </Paper>
                     <Grid

@@ -26,10 +26,10 @@ export function ParametersBox() {
     const {setSnackbar} = useSnack()
 
     const [framelength, setFramelength] = useState("256")
-    const [cmap, setCmap] = useState("hann")
+    const [cmap, setCmap] = useState("viridis")
     const [hoplength, setHopelength] = useState("512")
     const [mode, setMode] = useState("power")
-    const [window, setWindow] = useState("viridis")
+    const [window, setWindow] = useState("hann")
 
     const [openParam, setOpenParam] = useState(false)
 
@@ -40,14 +40,15 @@ export function ParametersBox() {
     function handleSaveParameters(){
         const param = {
             framelength: Number(framelength),
-            cmap,
+            cmap: cmap,
             hoplength: Number(hoplength),
-            mode,
+            mode: mode,
             specid: "15",
-            window
+            window: window
         } as ParametersType
         console.log(param)
 
+        setParameters(param)
 
         setSnackbar(true, "Parâmetros atualizados", "info")
 
