@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react"
 import { createContext } from "react"
 
 const Parameters = {
-    specid: "0",
+    specid: "1",
     framelength: 1024,
     window: "hann",
     hoplength: 512,

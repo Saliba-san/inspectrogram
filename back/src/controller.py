@@ -30,10 +30,9 @@ class Generate_spectrogram(Resource):
         json_dict = request.get_json(force=True)
         parameters = StftParams().set_by_json(json_dict)
 
-        audio_id = json_dict["specId"]
+        audio_id = json_dict["specid"]
         print(audio_id)
 
-        print("#########################")
         musics = Musics.query.filter_by(id=audio_id)
         audio_file_path = musics_schema.dump(musics)[0]["path"]
 
