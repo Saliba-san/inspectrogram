@@ -82,6 +82,25 @@ def musics_post():
 	results = musics_schema.dump(musics)
 	return jsonify(results)
 
+@app.route("/deletefile", methods=["GET", "DELETE"], strict_slashes=False)
+def music_delete():
+
+	if 'id' not in request.form:
+		flash('Without id')
+		return redirect(request.url)
+
+	json_dict = request.get_json(force=True)
+
+    deleting_id = json_dict["specid"]
+
+	music = Music.query.filter_by(id=deleting_id).first()
+	result = musics_schema.dump(music)
+
+	if os.path.exists("demofile.txt"):
+  		os.remove(music.path)
+
+	db.session.delete(music)
+	db.session.commit()
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
