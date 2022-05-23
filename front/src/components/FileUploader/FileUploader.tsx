@@ -61,8 +61,7 @@ export function FileUploader() {
         setIsLoading(false)
         setFile(new Blob() )
         setBlockDelete(true)
-
-
+        clearForm()
     }
 
     function clearForm () {

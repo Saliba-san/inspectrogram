@@ -2,9 +2,9 @@ import { ReactNode, useState } from "react"
 import { createContext } from "react"
 
 const Parameters = {
-    specid: "",
+    specid: "0",
     framelength: 1024,
-    window: "",
+    window: "hann",
     hoplength: 512,
     cmap: "default",
     mode: "power"
