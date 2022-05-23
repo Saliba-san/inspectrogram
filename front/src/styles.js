@@ -87,5 +87,10 @@ export const useStyles = makeStyles({
         background: "transparent",
         color: "#ccc8c8",
         marginTop: "2rem"
+    },
+    itembox: {
+        borderRadius: 8,
+        borderColor: "#ccc8c8",
+        borderWidth: 4
     }
 })
