@@ -42,7 +42,7 @@ class Generate_spectrogram(Resource):
         spectrogram = Spectrogram(stft)
         b64_img = spectrogram.visualize()
 
-        img = str(b64_img)
+        img = str(b64_img, "utf-8")
 
         return img
 

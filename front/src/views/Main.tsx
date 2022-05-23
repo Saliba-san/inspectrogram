@@ -11,6 +11,7 @@ import {Settings, PlayArrow} from "@mui/icons-material";
 import {changeSpectogramParameter} from "../servicies/chparameter"
 import {MusicList} from "../components/MusicList/MusicList";
 import {Image} from "../contexts/ImageContext";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 
 export function Main () {
@@ -75,14 +76,11 @@ export function Main () {
                 >
                     <MusicList />
                     <Paper className={classes.specContainer}>
-                        <ReactCrop crop={crop} onChange={c => setCrop(c)}>
-                            {
-                                image === undefined ?
-                                    <>Vazio</>
-                                    :
-                                    <img src={image.data} />
-                            }
-                        </ReactCrop>
+                        <TransformWrapper>
+                            <TransformComponent>
+                                <   img src={pic} />
+                            </TransformComponent>
+                        </TransformWrapper>
                     </Paper>
                     <Grid
                         direction="row"
