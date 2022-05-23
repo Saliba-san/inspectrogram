@@ -1,7 +1,7 @@
 import {BaseDialog, BaseDialogProps} from "../BaseDialog/BaseDialog";
 import {
     DialogProps,
-    FormControl,
+    FormControl, Grid,
     InputLabel,
     OutlinedInput,
     Select,
@@ -37,21 +37,17 @@ export function ParametersBox() {
         setOpenParam(false)
     }
 
-    /**
-     * TODO concertar ID
-     */
     function handleSaveParameters(){
         const param = {
             framelength: Number(framelength),
             cmap,
             hoplength: Number(hoplength),
             mode,
-            specid: "file",
+            specid: "15",
             window
         } as ParametersType
         console.log(param)
 
-        setParameters(param)
 
         setSnackbar(true, "Parâmetros atualizados", "info")
 
@@ -97,7 +93,7 @@ export function ParametersBox() {
                     options={hoplenghtOption}
                 />
 
-                <div>
+                <Grid>
                     <button
                         onClick={() => handleSaveParameters()}
                         className={classes.paramButton}
@@ -110,7 +106,7 @@ export function ParametersBox() {
                     >
                         Fechar
                     </button>
-                </div>
+                </Grid>
             </BaseDialog>
             <button
                 className={classes.settingButton}

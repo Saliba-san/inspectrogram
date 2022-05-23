@@ -9,12 +9,11 @@ import {BaseSnackbar} from "../components/Snackbar/BaseSnackbar";
 import {ParametersBox} from "../components/ParametersBox/ParametersBox";
 import {Settings, PlayArrow} from "@mui/icons-material";
 import {changeSpectogramParameter} from "../servicies/chparameter"
+import {MusicList} from "../components/MusicList/MusicList";
 
 
 export function Main () {
 
-    const [spectogram, setSpectogram] = useState("")
-    const [spectogramId, setSpectogramId] = useState("")
     const {parameters} = useParameters()
 
     const {image} = useImage();
@@ -63,7 +62,7 @@ export function Main () {
                     justifyContent={"space-evenly"}
                     xs={12} md={12} lg={12} xl={12}
                 >
-                    <ParametersBox />
+                    <MusicList />
                     <Paper className={classes.specContainer}>
                         <ReactCrop crop={crop} onChange={c => setCrop(c)}>
                             <img src={pic} />
@@ -81,8 +80,7 @@ export function Main () {
                             }}
                         >
                             <PlayArrow/>                      
-                        
-                        
+
                         </button>
                     </Grid>
                 </Grid>

@@ -35,7 +35,7 @@ export function SelectList({data, setData, options, label}: SelectListType) {
                     {
                         Object.entries(options).map(([key, value]) => {
                             return(
-                                <option value={value.value}>{value.title}</option>
+                                <option value={value.value} style={{color: "#ccc8c8"}}>{value.title}</option>
                             )
                         })}
                 </Select>

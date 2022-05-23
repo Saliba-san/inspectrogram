@@ -1,7 +1,9 @@
 import {api} from "./api";
 import {ParametersType} from "../contexts/ParametersContext"
 
-export const changeSpectogramParameter = async (data:ParametersType) => {
+export const changeSpectogramParameter = async (data: ParametersType) => {
+
+    console.log(data)
 
     const response = await api.post('genspec', JSON.stringify(data))
         .then(res => {

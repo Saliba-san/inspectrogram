@@ -4,7 +4,7 @@ import {createTheme, ThemeProvider} from "@mui/material";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {ImageContextProvider} from "./contexts/ImageContext";
 import {SnackContextProvider} from "./contexts/SnackContext";
-import { ParametersContext } from './contexts/ParametersContext';
+import {ParametersContext, ParametersContextProvider} from './contexts/ParametersContext';
 import {MusicContext, MusicContextProvider} from "./contexts/MusicasContext";
 
 const theme = createTheme({
@@ -28,11 +28,13 @@ function App() {
         <MusicContextProvider>
           <ImageContextProvider>
             <SnackContextProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Main/>} />
-                </Routes>
-              </BrowserRouter>
+              <ParametersContextProvider>
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Main/>} />
+                  </Routes>
+                </BrowserRouter>
+              </ParametersContextProvider>
             </SnackContextProvider>
           </ImageContextProvider>
         </MusicContextProvider>
