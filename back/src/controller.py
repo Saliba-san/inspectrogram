@@ -33,11 +33,13 @@ class Generate_spectrogram(Resource):
 
         musics = Musics.query.filter_by(id=audio_id)
 
+        audio_file_dict = musics_schema.dump(musics)
         try:
-            audio_file_path = musics_schema.dump(musics)[0]["path"]
+            audio_file_dict[0]["path"]
         except IndexError:
             print("Áudio não encontrado em base de dados")
 
+        audio_file_path = audio_file_dict[0]["path"]
         audio = AudioSignal(audio_file_path=audio_file_path)
 
         stft = Stft(parameters).set_stft_from_audio(audio)
