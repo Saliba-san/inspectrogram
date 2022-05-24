@@ -6,6 +6,8 @@ import copy
 import io
 import base64
 
+mpl.rcParams['savefig.pad_inches'] = 0
+
 class VisualizationStrategy(ABC):
 
     @abstractmethod
@@ -24,6 +26,7 @@ class RosaVisualizationStrategy(VisualizationStrategy):
                     y_axis="linear")
 
         bytes_string = io.BytesIO()
+        plt.autoscale(tight=True)
         plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
@@ -43,6 +46,7 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
         plt.yticks([])
 
         bytes_string = io.BytesIO()
+        plt.autoscale(tight=True)
         plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
