@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from librosa import display as ld
+import librosa as rosa
 from abc import ABC, abstractmethod
 import copy
 import io
 import base64
-
 
 class VisualizationStrategy(ABC):
 
@@ -25,14 +25,15 @@ class RosaVisualizationStrategy(VisualizationStrategy):
                     y_axis="linear")
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png', dpi=1800, bbox_inches="tight")
+        plt.savefig(bytes_string, format='png', dpi=1800, bbox_inches="tight",
+                    pad_inches=0)
+
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
 
         return b64_img
-
 
 class MatplotVisualizationStrategy(VisualizationStrategy):
 
@@ -45,13 +46,14 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
         plt.yticks([])
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png', dpi=1800, bbox_inches="tight")
+        plt.savefig(bytes_string, format='png', dpi=1800, bbox_inches="tight",
+                    pad_inches=0)
+
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
         return b64_img
-
 
 class Spectrogram():
 
@@ -81,4 +83,3 @@ class Spectrogram():
     def visualize(self):
         img = self.visualizer.visualize(self.stft, self.cmap)
         return img
-
