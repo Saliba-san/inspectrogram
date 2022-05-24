@@ -30,10 +30,13 @@ class Generate_spectrogram(Resource):
         parameters = StftParams().set_by_json(json_dict)
 
         audio_id = json_dict["specid"]
-        print(audio_id)
 
         musics = Musics.query.filter_by(id=audio_id)
-        audio_file_path = musics_schema.dump(musics)[0]["path"]
+
+        try:
+            audio_file_path = musics_schema.dump(musics)[0]["path"]
+        except IndexError:
+            print("Áudio não encontrado em base de dados")
 
         audio = AudioSignal(audio_file_path=audio_file_path)
 
