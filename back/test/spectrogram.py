@@ -24,14 +24,13 @@ class RosaVisualizationStrategy(VisualizationStrategy):
                     y_axis="linear")
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png')
+        plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
 
         return b64_img
-
 
 class MatplotVisualizationStrategy(VisualizationStrategy):
 
@@ -44,13 +43,12 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
         plt.yticks([])
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png')
+        plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
         return b64_img
-
 
 class Spectrogram():
 
