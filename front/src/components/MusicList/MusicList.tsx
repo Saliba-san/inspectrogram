@@ -10,21 +10,6 @@ import { RadioGroup } from "@headlessui/react";
 import {ClassNamesProps} from "@emotion/react";
 import {Grid, Typography} from "@mui/material";
 
-function CheckIcon() {
-    return (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" >
-            <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
-            <path
-                d="M7 13l3 3 7-7"
-                stroke="#fff"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    )
-}
-
 
 export function MusicList() {
 
@@ -32,7 +17,9 @@ export function MusicList() {
 
     const {musicas} = useMusica()
 
-    const [musicid, setMusicid] = useState(0)
+    const {setParameters} = useParameters()
+
+    const [musicid, setMusicid] = useState(-1)
 
     const [openParam, setOpenParam] = useState(false)
 
@@ -44,8 +31,19 @@ export function MusicList() {
      * TODO concertar ID
      */
     function handleSaveParameters(){
+        setParameters({
+            specid: musicid.toString()
+        })
+        setOpenParam(false)
+    }
 
+    function handleSelect(index: number) {
+        setMusicid(index)
+    }
 
+    function handleCole() {
+        setOpenParam(false)
+        setMusicid(-1)
     }
 
     return(
@@ -69,8 +67,11 @@ export function MusicList() {
                                     return (
                                         <div  className={classes.itembox}>
                                             <option
-                                                style={{color: "#ccc8c8", borderColor: "#ccc8c8", padding: 5}}
+                                                className={
+                                                    ((Number(index) !== musicid) ? classes.musicOption : classes.musicOptionSelected)
+                                                }
                                                 value={value.id}
+                                                onClick={() => handleSelect(Number(index))}
                                             >
                                                 {value.music}
                                             </option>
@@ -96,7 +97,7 @@ export function MusicList() {
                         Salvar
                     </button>
                     <button
-                        onClick={() => setOpenParam(false)}
+                        onClick={() => handleCole()}
                         className={classes.paramButton}
                     >
                         Fechar

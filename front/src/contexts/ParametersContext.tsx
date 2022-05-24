@@ -11,12 +11,12 @@ const Parameters = {
 } as ParametersType
 
 export type ParametersType = {
-    specid: string,
-    framelength:number,
-    window:string,
-    hoplength:number,
-    cmap: string,
-    mode: string   
+    specid?: string,
+    framelength?:number,
+    window?: string,
+    hoplength?: number,
+    cmap?: string,
+    mode?: string
 }
 
 
@@ -36,15 +36,26 @@ export function ParametersContextProvider (props: ParametersContextTypeProviderP
     const [parameters, setParameters] = useState<ParametersType>(Parameters)
 
     function setParametersData({cmap,framelength,hoplength,mode,specid,window}:ParametersType){
-        
-        setParameters({
-            specid,
-            framelength,
-            window,
-            hoplength,
-            cmap,
-            mode
-        })
+
+        if (specid === undefined) {
+            setParameters({
+                specid: parameters.specid,
+                framelength,
+                window,
+                hoplength,
+                cmap,
+                mode
+            })
+        } else {
+            setParameters({
+                specid,
+                framelength: parameters.framelength,
+                window: parameters.window,
+                hoplength: parameters.hoplength,
+                cmap: parameters.cmap,
+                mode: parameters.mode
+            })
+        }
     }
 
     return (

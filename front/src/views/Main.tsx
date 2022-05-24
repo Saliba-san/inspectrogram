@@ -79,10 +79,11 @@ export function Main () {
                             {
                                 (image !== undefined) ?
                                     <TransformWrapper>
-                                        <TransformComponent>
+                                        <TransformComponent >
                                             < img
-                                                style={{width: "80%", height:"40%",
-                                                    maxWidth: 1000, maxHeight: 400,
+                                                style={{width: "100%", height:"100%",
+                                                    maxWidth: 1800, maxHeight: 600,
+                                                    minWidth: 800, minHeight: 400,
                                                     overflowX: "scroll"
                                                 }}
                                                 src={image.data}

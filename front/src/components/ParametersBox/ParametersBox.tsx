@@ -22,7 +22,7 @@ export function ParametersBox() {
 
     const classes = useStyles();
 
-    const {setParameters} = useParameters()
+    const {parameters, setParameters} = useParameters()
     const {setSnackbar} = useSnack()
 
     const [framelength, setFramelength] = useState("256")
@@ -43,10 +43,9 @@ export function ParametersBox() {
             cmap: cmap,
             hoplength: Number(hoplength),
             mode: mode,
-            specid: "5",
-            window: window
+            window: window,
         } as ParametersType
-        console.log(param)
+        console.log(parameters)
 
         setParameters(param)
 
