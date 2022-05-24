@@ -49,7 +49,7 @@ class Stft():
             fft_frames = np.square(fft_frames)
 
         if self.db:
-            fft_frames = librosa.amplitude_to_db(fft_frames, ref=np.max)
+            fft_frames = rosa.amplitude_to_db(fft_frames, ref=np.max)
 
         fft_frames = np.flip(fft_frames, axis=0)
 
