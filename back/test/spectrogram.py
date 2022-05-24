@@ -47,6 +47,8 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
 
         bytes_string = io.BytesIO()
         plt.autoscale(tight=True)
+        plt.margins(x=0)
+        plt.margins(y=0)
         plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
