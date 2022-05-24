@@ -82,9 +82,9 @@ export const useStyles = makeStyles({
         color: "#9A4AECFF",
         background: "transparent",
         border: "transparent",
-            '&:hover': {
-                background: "#454148",
-            },
+        '&:hover': {
+            background: "#454148",
+        },
         transition: "step-end",
         marginRight:10,
         fontSize: "1rem",
@@ -99,5 +99,26 @@ export const useStyles = makeStyles({
         borderRadius: 8,
         borderColor: "#ccc8c8",
         borderWidth: 4
+    },
+    musicOption: {
+        color: "#ccc8c8",
+        borderColor: "#ccc8c8",
+        padding: 10,
+        borderRadius: 10,
+        '&:hover': {
+            background: "#464448",
+            cursor: "pointer"
+        },
+    },
+    musicOptionSelected: {
+        color: "#9A4AECFF",
+        borderColor: "#9A4AECFF",
+        borderWidth: 2,
+        padding: 10,
+        borderRadius: 10,
+        '&:hover': {
+            background: "#464448",
+            cursor: "pointer"
+        },
     }
 })
