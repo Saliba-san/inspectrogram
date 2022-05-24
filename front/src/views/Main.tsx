@@ -17,8 +17,8 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 export function Main () {
 
     const {parameters} = useParameters()
-
-    const {image, setImage} = useImage();
+    const {image, setImage} = useImage()
+    const {setSnackbar} = useSnack()
 
     const [imageLoad, setImageLoad] = useState(false)
 
@@ -34,9 +34,11 @@ export function Main () {
                     data: "data:image/png;base64," + res.data,
                     imageid: "1"
                 }as Image
-                console.log(image)
-
+                setSnackbar(true,"Imagem gerada com sucesso", "success")
                 setImage(image)
+            })
+            .catch( err => {
+                setSnackbar(true, err.data, "error")
             })
 
         setImageLoad(false)
@@ -73,36 +75,44 @@ export function Main () {
                 >
                     <MusicList />
 
-                    {
-                        !imageLoad ?
-                            <>
-                            {
-                                (image !== undefined) ?
-                                    <TransformWrapper>
-                                        <TransformComponent >
-                                            < img
-                                                style={{width: "100%", height:"100%",
-                                                    maxWidth: 1800, maxHeight: 600,
-                                                    minWidth: 800, minHeight: 400,
-                                                    overflowX: "scroll"
-                                                }}
-                                                src={image.data}
-                                            />
-                                        </TransformComponent>
-                                    </TransformWrapper>
-                                :
-                                <div>
-                                    <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
-                                       Carregue uma música para poder visualiza-lá
-                                    </Typography>
+                    <div
+                        style={{
+                            padding: 10,
+                            borderStyle: "groove",
+                            borderColor: "#ccc8c8"
+                        }}
+                    >
+                        {
+                            !imageLoad ?
+                                <>
+                                {
+                                    (image !== undefined) ?
+                                        <TransformWrapper>
+                                            <TransformComponent >
+                                                < img
+                                                    style={{width: "100%", height:"100%",
+                                                        maxWidth: 1600, maxHeight: 800,
+                                                        minWidth: 800, minHeight: 500,
+                                                        overflowX: "scroll"
+                                                    }}
+                                                    src={image.data}
+                                                />
+                                            </TransformComponent>
+                                        </TransformWrapper>
+                                    :
+                                    <div>
+                                        <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
+                                           Carregue uma música para poder visualiza-lá
+                                        </Typography>
+                                    </div>
+                                }
+                                </>
+                            :
+                                <div style={{padding: "10px"}}>
+                                    <CircularProgress />
                                 </div>
-                            }
-                            </>
-                        :
-                            <div style={{padding: "10px"}}>
-                                <CircularProgress />
-                            </div>
-                    }
+                        }
+                    </div>
 
                     <Grid
                         direction="row"
