@@ -43,7 +43,7 @@ export function ParametersBox() {
             cmap: cmap,
             hoplength: Number(hoplength),
             mode: mode,
-            specid: "15",
+            specid: "5",
             window: window
         } as ParametersType
         console.log(param)
@@ -94,20 +94,27 @@ export function ParametersBox() {
                     options={hoplenghtOption}
                 />
 
-                <Grid>
-                    <button
-                        onClick={() => handleSaveParameters()}
-                        className={classes.paramButton}
+                <div style={{marginTop: 10}}>
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
                     >
-                        Salvar
-                    </button>
-                    <button
-                        onClick={() => setOpenParam(false)}
-                        className={classes.paramButton}
-                    >
-                        Fechar
-                    </button>
-                </Grid>
+                        <button
+                            onClick={() => handleSaveParameters()}
+                            className={classes.paramButton}
+                        >
+                            Salvar
+                        </button>
+                        <button
+                            onClick={() => setOpenParam(false)}
+                            className={classes.paramButton}
+                        >
+                            Fechar
+                        </button>
+                    </Grid>
+                </div>
             </BaseDialog>
             <button
                 className={classes.settingButton}

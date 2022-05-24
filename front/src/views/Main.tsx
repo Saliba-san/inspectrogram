@@ -1,7 +1,7 @@
 import React, {ReactEventHandler, useContext, useState} from 'react'
 import {useStyles} from "../styles";
 import {FileUploader} from "../components/FileUploader/FileUploader";
-import {Box, Container, Grid, Paper, Slider, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, Grid, Paper, Slider, Typography} from "@mui/material";
 import pic from "../images/windowlicker.jpg"
 import ReactCrop, {Crop} from "react-image-crop";
 import {useImage, useParameters, useSnack} from "../hooks/useContexts";
@@ -20,18 +20,14 @@ export function Main () {
 
     const {image, setImage} = useImage();
 
-    const [crop, setCrop] = useState<Crop>({
-        unit: '%', // Can be 'px' or '%'
-        x: 25,
-        y: 25,
-        width: 50,
-        height: 50
-    })
+    const [imageLoad, setImageLoad] = useState(false)
 
     const classes = useStyles();
 
     function handleCreateNewSpec() {
-        const response =  changeSpectogramParameter(parameters)
+        setImageLoad(true)
+
+        changeSpectogramParameter(parameters)
             .then( res => {
 
                 const image = {
@@ -43,6 +39,7 @@ export function Main () {
                 setImage(image)
             })
 
+        setImageLoad(false)
     }
 
     return (
@@ -75,13 +72,37 @@ export function Main () {
                     xs={12} md={12} lg={12} xl={12}
                 >
                     <MusicList />
-                    <Paper className={classes.specContainer}>
-                        <TransformWrapper>
-                            <TransformComponent>
-                                <   img src={pic} />
-                            </TransformComponent>
-                        </TransformWrapper>
-                    </Paper>
+
+                    {
+                        !imageLoad ?
+                            <>
+                            {
+                                (image !== undefined) ?
+                                    <TransformWrapper>
+                                        <TransformComponent>
+                                            < img
+                                                style={{width: "80%", height:"40%",
+                                                    maxWidth: 1000, maxHeight: 400,
+                                                    overflowX: "scroll"
+                                                }}
+                                                src={image.data}
+                                            />
+                                        </TransformComponent>
+                                    </TransformWrapper>
+                                :
+                                <div>
+                                    <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
+                                       Carregue uma música para poder visualiza-lá
+                                    </Typography>
+                                </div>
+                            }
+                            </>
+                        :
+                            <div style={{padding: "10px"}}>
+                                <CircularProgress />
+                            </div>
+                    }
+
                     <Grid
                         direction="row"
                         justifyContent={"space-evenly"}

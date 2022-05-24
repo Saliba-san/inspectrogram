@@ -20,9 +20,12 @@ export const useStyles = makeStyles({
         paddingLeft: 10,
         color: "#ccc8c8",
         background: "#9A4AECFF",
+        '&:hover': {
+            background: "#a86de5",
+        },
         border: 0,
         marginRight:10,
-        width: "50%"
+        width: "50%",
     },
     botaoCancelar: {
         fontWeight: 800,
@@ -79,8 +82,12 @@ export const useStyles = makeStyles({
         color: "#9A4AECFF",
         background: "transparent",
         border: "transparent",
+            '&:hover': {
+                background: "#454148",
+            },
+        transition: "step-end",
         marginRight:10,
-        fontSize: "1rem"
+        fontSize: "1rem",
     },
     settingButton: {
         borderRadius: 100,
