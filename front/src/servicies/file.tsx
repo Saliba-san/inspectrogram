@@ -27,9 +27,9 @@ export const fileUpload = async (data: FormData) => {
     } as UploadResponseType
 }
 
-export const deleteSelectedSpectrogram = async (specId: string) => {
+export const deleteSelectedMusic = async (specId: string) => {
 
-    const response = await api.post('delspec', JSON.stringify(specId))
+    return await api.post('deletefile', JSON.stringify(specId))
         .then(res => {
             console.log("Sucesso")
             return res
@@ -38,19 +38,4 @@ export const deleteSelectedSpectrogram = async (specId: string) => {
             console.log("Erro")
             return err
         }) as ResponseType
-    return response
-}
-
-export const getSpectrogram = async (specId: string) => {
-
-    const response = await api.get('getspec/' + specId)
-        .then(res => {
-            console.log("Sucesso")
-            return res
-        })
-        .catch(err => {
-            console.log("Erro")
-            return err
-        })
-    return response;
 }

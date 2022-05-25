@@ -10,11 +10,9 @@ import {Image} from "../../contexts/ImageContext";
 
 export function FileUploader() {
 
-    const {setImage} = useImage()
-    const {setSnackbar, snackData} = useSnack()
+    const {setSnackbar} = useSnack()
     const {musicas, setMusics} = useMusica()
 
-    // const [file, setFile] = useState({file: {}, name: ""} );
     const [file, setFile] = useState(new Blob);
     const [isLoading, setIsLoading] = useState( false );
     const [blockDelete, setBlockDelete] = useState(true)
@@ -49,10 +47,10 @@ export function FileUploader() {
                 setSnackbar(true, "Arquivo enviado", "success")
                 await setMusics(res.data)
 
-                console.log(musicas)
+                console.log(res.data)
             })
             .catch( async err => {
-                setSnackbar(true, err.data, "error")
+                setSnackbar(true, "Algo deu errado", "error")
             })
 
 

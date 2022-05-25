@@ -70,12 +70,6 @@ export function Main () {
                     direction="column"
                     xs={12} md={12} lg={12} xl={12}
                 >
-                    {/*<Typography variant="h4" style={{fontWeight: 700, color: "#ccc8c8"}}>*/}
-                    {/*    Inspectrograma*/}
-                    {/*</Typography>*/}
-                    {/*<Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>*/}
-                    {/*    - Inspecione suas músicas aqui -*/}
-                    {/*</Typography>*/}
                     <img
                         src={ImagemLogo}
                         style={{maxWidth: 550, paddingTop: 10}}

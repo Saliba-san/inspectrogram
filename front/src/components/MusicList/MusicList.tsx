@@ -9,6 +9,7 @@ import {MusicNote} from "@mui/icons-material"
 import { RadioGroup } from "@headlessui/react";
 import {ClassNamesProps} from "@emotion/react";
 import {Grid, Typography} from "@mui/material";
+import {deleteSelectedMusic} from "../../servicies/file";
 
 
 export function MusicList() {
@@ -17,6 +18,7 @@ export function MusicList() {
 
     const {musicas, deleteMusica} = useMusica()
     const {setParameters} = useParameters()
+    const {setSnackbar, snackData} = useSnack()
 
     const [musicid, setMusicid] = useState(-1)
     const [openParam, setOpenParam] = useState(false)
@@ -48,7 +50,18 @@ export function MusicList() {
 
     function handleDelete() {
 
-        deleteMusica(musicid)
+        if (musicas !== undefined) {
+            if(musicas.length > 0) {
+                deleteSelectedMusic((musicas[musicid].id).toString())
+                    .then( res => {
+                        deleteMusica(musicid)
+                        setSnackbar(true, "Arquivo deletado", "success")
+                    })
+                    .catch( err => {
+                        setSnackbar(true, "Algo deu errado", "error")
+                    })
+            }
+        }
     }
 
     return(
