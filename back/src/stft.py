@@ -52,6 +52,9 @@ class Stft():
 
         if self.db == "db":
             fft_frames = rosa.amplitude_to_db(fft_frames, ref=np.max)
+        else:
+            fft_frames[np.where(fft_frames <= 0)] = 1e-12
+            fft_frames = 10*np.log10(fft_frames)
 
         fft_frames = np.flip(fft_frames, axis=0)
 
@@ -62,9 +65,31 @@ class Stft():
         self.sr = audio_signal.sr
 
         self.set_stft(audio_signal.signal)
+
         return self
 
     def get_stft(self):
+
         assert self.fft_frames is not None, "SFTF data not defined"
 
         return self.fft_frames
+
+    def get_frame_maxima(self, fft_frame, n=1):
+
+        return np.mean(np.argpartition(fft_frame, -n)[-n:])
+
+    def get_spectral_maxima(signal, stft_params, n=1):
+
+        fft_frames = np.abs(librosa.stft(signal, n_fft=stft_params.frame_size,
+                                          hop_length=stft_params.hop_length,
+                                          window=stft_params.window))
+
+        fft_frames = get_stft(signal, stft_params, sr=100, db=True,
+                              stft_slice=slice(265, 380))
+
+        maxima = np.zeros(fft_frames.shape[1])
+
+        for f, frame in enumerate(fft_frames.T):
+            maxima[f] = get_frame_maxima(frame, n)
+
+        return maxima
