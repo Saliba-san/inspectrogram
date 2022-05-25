@@ -42,9 +42,7 @@ export function FileUploader() {
         
         const data = new FormData();
 
-        console.log(file)
         data.append("file", file)
-        console.log(data)
 
         fileUpload(data)
             .then( async res => {

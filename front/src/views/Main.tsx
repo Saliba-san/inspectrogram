@@ -12,7 +12,7 @@ import {changeSpectogramParameter} from "../servicies/chparameter"
 import {MusicList} from "../components/MusicList/MusicList";
 import {Image} from "../contexts/ImageContext";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-
+import ImagemLogo from '../images/logo.png'
 
 export function Main () {
 
@@ -25,23 +25,34 @@ export function Main () {
     const classes = useStyles();
 
     function handleCreateNewSpec() {
-        setImageLoad(true)
 
-        changeSpectogramParameter(parameters)
-            .then( res => {
+        if (!imageLoad) {
 
-                const image = {
-                    data: "data:image/png;base64," + res.data,
-                    imageid: "1"
-                }as Image
-                setSnackbar(true,"Imagem gerada com sucesso", "success")
-                setImage(image)
-            })
-            .catch( err => {
-                setSnackbar(true, err.data, "error")
-            })
+            console.log(imageLoad)
+            setImageLoad(true)
+            console.log(imageLoad)
 
-        setImageLoad(false)
+            setSnackbar(true, "Aguarde alguns instantes...", "info")
+
+            changeSpectogramParameter(parameters)
+                .then(res => {
+
+                    const image = {
+                        data: "data:image/png;base64," + res.data,
+                        imageid: "1"
+                    } as Image
+                    setSnackbar(true, "Imagem gerada com sucesso", "success")
+                    setImage(image)
+                })
+                .catch(err => {
+                    setSnackbar(true, err.data, "error")
+                })
+
+            setImageLoad(false)
+
+        } else {
+            setSnackbar(true, "Sua imagem já está sendo gerada", "warning")
+        }
     }
 
     return (
@@ -59,12 +70,16 @@ export function Main () {
                     direction="column"
                     xs={12} md={12} lg={12} xl={12}
                 >
-                    <Typography variant="h4" style={{fontWeight: 700, color: "#ccc8c8"}}>
-                        Inspectrograma
-                    </Typography>
-                    <Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>
-                        - Inspecione suas músicas aqui -
-                    </Typography>
+                    {/*<Typography variant="h4" style={{fontWeight: 700, color: "#ccc8c8"}}>*/}
+                    {/*    Inspectrograma*/}
+                    {/*</Typography>*/}
+                    {/*<Typography variant="h6" style={{fontWeight: 700, color: "#ccc8c8"}}>*/}
+                    {/*    - Inspecione suas músicas aqui -*/}
+                    {/*</Typography>*/}
+                    <img
+                        src={ImagemLogo}
+                        style={{maxWidth: 550, paddingTop: 10}}
+                    />
                 </Grid>
                 <Grid
                     container
@@ -79,7 +94,9 @@ export function Main () {
                         style={{
                             padding: 10,
                             borderStyle: "groove",
-                            borderColor: "#ccc8c8"
+                            borderColor: "#ccc8c8",
+                            // minWidth: 800, minHeight: 500,
+                            display: "block"
                         }}
                     >
                         {

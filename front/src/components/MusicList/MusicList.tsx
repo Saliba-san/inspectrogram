@@ -16,25 +16,21 @@ export function MusicList() {
     const classes = useStyles();
 
     const {musicas} = useMusica()
-
     const {setParameters} = useParameters()
 
     const [musicid, setMusicid] = useState(-1)
-
     const [openParam, setOpenParam] = useState(false)
 
     function handleClose() {
         setOpenParam(false)
     }
 
-    /**
-     * TODO concertar ID
-     */
     function handleSaveParameters(){
         if (musicas !== undefined ) {
             setParameters({
                 specid: (musicas[musicid].id).toString()
             })
+            console.log(musicas[musicid].id)
         }
         setOpenParam(false)
     }

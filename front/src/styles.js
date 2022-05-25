@@ -93,7 +93,11 @@ export const useStyles = makeStyles({
         borderRadius: 100,
         background: "transparent",
         color: "#ccc8c8",
-        marginTop: "2rem"
+        marginTop: "2rem",
+        '&:hover': {
+            background: "#4f336c",
+            cursor: "pointer"
+        },
     },
     itembox: {
         borderRadius: 8,
