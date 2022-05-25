@@ -16,6 +16,7 @@ class Stft():
         self.sr = parameters.sr
         self.db = parameters.db
         self.freq_slice = parameters.freq_slice
+        self.spectral_maxima = None
 
     def set_stft(self, signal):
 
@@ -74,22 +75,15 @@ class Stft():
 
         return self.fft_frames
 
-    def get_frame_maxima(self, fft_frame, n=1):
+    # def get_frame_maxima(self, fft_frame, n=1):
 
-        return np.mean(np.argpartition(fft_frame, -n)[-n:])
+    #     return np.mean(np.argpartition(fft_frame, -n)[-n:])
 
-    def get_spectral_maxima(signal, stft_params, n=1):
+    def set_spectral_maxima(self, stft_params, n=1):
 
-        fft_frames = np.abs(librosa.stft(signal, n_fft=stft_params.frame_size,
-                                          hop_length=stft_params.hop_length,
-                                          window=stft_params.window))
+        maxima = np.zeros(self.fft_frames.shape[1])
 
-        fft_frames = get_stft(signal, stft_params, sr=100, db=True,
-                              stft_slice=slice(265, 380))
+        for f, frame in enumerate(self.fft_frames.T):
+            maxima[f] = np.argpartition(fft_frame, -1)[-1]
 
-        maxima = np.zeros(fft_frames.shape[1])
-
-        for f, frame in enumerate(fft_frames.T):
-            maxima[f] = get_frame_maxima(frame, n)
-
-        return maxima
+        self.spectral_maxima = maxima
