@@ -30,21 +30,14 @@ class Generate_spectrogram(Resource):
         parameters = StftParams().set_by_json(json_dict)
 
         audio_id = json_dict["specid"]
+        print(audio_id)
 
         musics = Musics.query.filter_by(id=audio_id)
+        audio_file_path = musics_schema.dump(musics)[0]["path"]
 
-        audio_file_dict = musics_schema.dump(musics)
-
-        try:
-            audio_file_dict[0]["path"]
-        except IndexError:
-            print("Áudio não encontrado em base de dados")
-
-        audio_file_path = audio_file_dict[0]["path"]
         audio = AudioSignal(audio_file_path=audio_file_path)
 
         stft = Stft(parameters).set_stft_from_audio(audio)
-        stft.set_spectral_maxima()
 
         spectrogram = Spectrogram(stft)
         b64_img = spectrogram.visualize()
@@ -89,6 +82,25 @@ def musics_post():
 	results = musics_schema.dump(musics)
 	return jsonify(results)
 
+@app.route("/deletefile", methods=["GET", "DELETE"], strict_slashes=False)
+def music_delete():
+
+	if 'id' not in request.form:
+		flash('Without id')
+		return redirect(request.url)
+
+	json_dict = request.get_json(force=True)
+
+    deleting_id = json_dict["specid"]
+
+	music = Music.query.filter_by(id=deleting_id).first()
+	result = musics_schema.dump(music)
+
+	if os.path.exists("demofile.txt"):
+  		os.remove(music.path)
+
+	db.session.delete(music)
+	db.session.commit()
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
