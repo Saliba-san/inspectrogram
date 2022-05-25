@@ -8,7 +8,8 @@ const Parameters = {
     hoplength: 512,
     cmap: "default",
     mode: "power",
-    intensity: "db"
+    intensity: "db",
+    analysis: "simple",
 } as ParametersType
 
 export type ParametersType = {
@@ -18,7 +19,8 @@ export type ParametersType = {
     hoplength?: number,
     cmap?: string,
     mode?: string,
-    intensity?: string
+    intensity?: string,
+    analysis?: string
 }
 
 
@@ -37,7 +39,7 @@ export function ParametersContextProvider (props: ParametersContextTypeProviderP
 
     const [parameters, setParameters] = useState<ParametersType>(Parameters)
 
-    function setParametersData({cmap,framelength,hoplength,mode,specid,window,intensity}:ParametersType){
+    function setParametersData({cmap,framelength,hoplength,mode,specid,window,intensity, analysis}:ParametersType){
 
         if (specid === undefined) {
             setParameters({
@@ -47,7 +49,8 @@ export function ParametersContextProvider (props: ParametersContextTypeProviderP
                 hoplength,
                 cmap,
                 mode,
-                intensity
+                intensity,
+                analysis
             })
         } else {
             setParameters({
@@ -57,7 +60,8 @@ export function ParametersContextProvider (props: ParametersContextTypeProviderP
                 hoplength: parameters.hoplength,
                 cmap: parameters.cmap,
                 mode: parameters.mode,
-                intensity: parameters.intensity
+                intensity: parameters.intensity,
+                analysis: parameters.analysis
             })
         }
     }

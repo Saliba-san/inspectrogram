@@ -31,6 +31,7 @@ export function ParametersBox() {
     const [mode, setMode] = useState("power")
     const [window, setWindow] = useState("hann")
     const [intensity, setIntensity] = useState("db")
+    const [analysis, setAnalysis] = useState("simple")
 
     const [openParam, setOpenParam] = useState(false)
 
@@ -45,7 +46,8 @@ export function ParametersBox() {
             hoplength: Number(hoplength),
             mode: mode,
             window: window,
-            intensity: intensity
+            intensity: intensity,
+            analysis: analysis
         } as ParametersType
         console.log(parameters)
 
@@ -116,6 +118,30 @@ export function ParametersBox() {
                     >
                         <ToggleButton value="db" style={{color: "#ccc8c8", paddingLeft: 20}} >dB</ToggleButton>
                         <ToggleButton value="amp" style={{color: "#ccc8c8"}} >Amp</ToggleButton>
+                    </ToggleButtonGroup>
+                </Grid>
+
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    style={{paddingTop: 10}}
+                >
+                    <Typography
+                        variant={"subtitle1"}
+                        style={{color: "#ccc8c8"}}
+                    >
+                        Análise:
+                    </Typography>
+                    <ToggleButtonGroup
+                        color="primary"
+                        value={analysis}
+                        exclusive
+                        onChange={ (event, data) => setAnalysis(data)}
+                    >
+                        <ToggleButton value="simple" style={{color: "#ccc8c8", paddingLeft: 20}} >Simp</ToggleButton>
+                        <ToggleButton value="complex" style={{color: "#ccc8c8"}} >Cmplx</ToggleButton>
                     </ToggleButtonGroup>
                 </Grid>
 

@@ -1,4 +1,4 @@
-import {createContext, ReactNode, useState} from "react";
+import {createContext, ReactNode, SetStateAction, useState} from "react";
 
 export type Musica = {
     id: number,
@@ -10,6 +10,7 @@ export type Musica = {
 type MusicContextType = {
     musicas: Musica[] | undefined,
     setMusics: (data: Musica[]) => Promise<void>
+    deleteMusica: (music: number) => void
 }
 
 export const MusicContext = createContext({} as MusicContextType)
@@ -18,14 +19,14 @@ type MusicaContextTypeProviderPorps = {
     children: ReactNode,
 }
 
-export function MusicContextProvider (props: MusicaContextTypeProviderPorps) {
+export function MusicContextProvider(props: MusicaContextTypeProviderPorps) {
 
     const [musicas, setMusicas] = useState<Musica[]>([])
 
-    async function updateMusicas (data: Musica[]) {
+    async function updateMusicas(data: Musica[]) {
 
         console.log(data)
-        data.forEach( item => {
+        data.forEach(item => {
             const newmusic: Musica = {
                 id: item.id,
                 artist: item.artist,
@@ -40,8 +41,25 @@ export function MusicContextProvider (props: MusicaContextTypeProviderPorps) {
 
     }
 
+    async function deleteMusic(id: number) {
+        if (id > -1) {
+            console.log(id)
+            console.log(musicas)
+            let aux: Musica[] = [];
+            for(let i = 0; i < musicas.length; i++) {
+                if(i !== id)
+                    aux = ([
+                        ...aux,
+                        musicas[i]
+                    ])
+            }
+            console.log(aux )
+            setMusicas(aux)
+        }
+    }
+
     return (
-        <MusicContext.Provider value={{musicas: musicas, setMusics: updateMusicas}} >
+        <MusicContext.Provider value={{musicas: musicas, setMusics: updateMusicas, deleteMusica: deleteMusic}} >
             {props.children}
         </MusicContext.Provider>
     )

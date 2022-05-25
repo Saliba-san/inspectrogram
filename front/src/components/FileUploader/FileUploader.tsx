@@ -143,7 +143,7 @@ export function FileUploader() {
                                     clearForm();
                                 }}
                             >
-                                Deletar
+                                Limpar
                             </button>
                         </div>
                     </Grid>

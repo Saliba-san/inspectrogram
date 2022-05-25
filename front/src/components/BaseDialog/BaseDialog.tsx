@@ -21,7 +21,7 @@ export function BaseDialog(props: BaseDialogProps) {
             aria-describedby="alert-dialog-description"
         >
             <div className={classes.inputContainer}>
-                <DialogTitle style={{border: "10px", color: "#ccc8c8"}}>
+                <DialogTitle style={{border: "10px", color: "#ccc8c8", minWidth: 200}}>
                     {props.name}
                 </DialogTitle>
                 <DialogContent>
