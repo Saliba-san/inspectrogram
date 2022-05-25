@@ -24,6 +24,7 @@ api = Api(app)
 app.secret_key = 'bcyiae7doqbucmopighyi'
 
 class Generate_spectrogram(Resource):
+
     def post(self):
 
         json_dict = request.get_json(force=True)
@@ -50,57 +51,75 @@ api.add_resource(Generate_spectrogram, "/genspec")
 
 @app.route("/uploadfile", methods=["GET","POST"], strict_slashes=False)
 def musics_post():
-	if request.method == "POST":
-		print(request.files)
-		if 'file' not in request.files:
-			flash('No file part')
-			return redirect(request.url)
+    if request.method == "POST":
+        print(request.files)
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
 
-		file = request.files['file']
-		# If the user does not select a file, the browser submits an
-		# empty file without a filename.
-		if file.filename == '':
-			flash('No selected file')
-			return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
 
-		path = app.config['UPLOAD_FOLDER']+ '/' + file.filename
+        path = app.config['UPLOAD_FOLDER']+ '/' + file.filename
 
-		if file and allowed_file(file.filename):
-			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-		music_file = TinyTag.get(path)
-		name = file.filename
-		if music_file.title:
-			name = music_file.title
-		artist = music_file.artist
-		new_music = Musics(music=name, artist=artist, path=path)
-		db.session.add(new_music)
-		db.session.commit()
+        music_file = TinyTag.get(path)
+        name = file.filename
+        if music_file.title:
+            name = music_file.title
+        artist = music_file.artist
+        new_music = Musics(music=name, artist=artist, path=path)
+        db.session.add(new_music)
+        db.session.commit()
 
-	musics = Musics.query.all()
-	results = musics_schema.dump(musics)
-	return jsonify(results)
+    musics = Musics.query.all()
+    results = musics_schema.dump(musics)
+    return jsonify(results)
 
 @app.route("/deletefile", methods=["GET", "DELETE"], strict_slashes=False)
 def music_delete():
 
-	if 'id' not in request.form:
-		flash('Without id')
-		return redirect(request.url)
+    if 'id' not in request.form:
+        flash('Without id')
+        return redirect(request.url)
 
-	json_dict = request.get_json(force=True)
+    json_dict = request.get_json(force=True)
 
     deleting_id = json_dict["specid"]
 
-	music = Music.query.filter_by(id=deleting_id).first()
-	result = musics_schema.dump(music)
+    music = Musics.query.filter_by(id=deleting_id).first()
 
-	if os.path.exists("demofile.txt"):
-  		os.remove(music.path)
+    if os.path.exists(music.path):
+        os.remove(music.path)
 
-	db.session.delete(music)
-	db.session.commit()
+    db.session.delete(music)
+    db.session.commit()
+
+@app.route("/deleteall", methods=["GET", "DELETE"], strict_slashes=False)
+def music_delete_all():
+
+    musics = Musics.query.all()
+
+    results = musics_schema.dump(musics)
+
+    print(results)
+
+    paths = [res["path"] for res in results]
+
+    for path in paths:
+        if os.path.exists(path):
+            print("##########")
+            print(f"os.remove({path})")
+
+    db.session.delete(musics)
+    db.session.commit()
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
