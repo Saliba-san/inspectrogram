@@ -39,6 +39,7 @@ class Generate_spectrogram(Resource):
         audio = AudioSignal(audio_file_path=audio_file_path)
 
         stft = Stft(parameters).set_stft_from_audio(audio)
+        stft.set_spectral_maxima()
 
         spectrogram = Spectrogram(stft)
         b64_img = spectrogram.visualize()
