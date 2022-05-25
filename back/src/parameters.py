@@ -15,7 +15,7 @@ class StftParams:
 
     def set_by_json(self, json_dict):
         self.db = json_dict["intensity"]
-        self.advanced = json_dict["analysis"]
+        self.analysis = json_dict["analysis"]
         self.mode = json_dict["mode"]
         self.window = json_dict["window"]
         self.frame_size = json_dict["framelength"]
