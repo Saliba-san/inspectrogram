@@ -13,6 +13,7 @@ class StftParams:
         self.freq_slice = freq_slice
 
     def set_by_json(self, json_dict):
+        self.db = json_dict["intensity"]
         self.mode = json_dict["mode"]
         self.window = json_dict["window"]
         self.frame_size = json_dict["framelength"]

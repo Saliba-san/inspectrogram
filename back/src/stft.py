@@ -19,6 +19,8 @@ class Stft():
 
     def set_stft(self, signal):
 
+        assert self.frame_size > self.hop_length, "Tamanho de salto inferior a tamanho de quadro de FFT"
+
         mode_transform = {
                            "power": np.abs,
                            "abs": np.abs,
@@ -48,7 +50,7 @@ class Stft():
         if self.mode == "power":
             fft_frames = np.square(fft_frames)
 
-        if self.db:
+        if self.db == "db":
             fft_frames = rosa.amplitude_to_db(fft_frames, ref=np.max)
 
         fft_frames = np.flip(fft_frames, axis=0)
