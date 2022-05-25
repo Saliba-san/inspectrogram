@@ -40,9 +40,9 @@ class Stft():
                                                      nperseg=self.frame_size,
                                                      noverlap=self.hop_length)
 
-        fft_frames = rosa.stft(signal, n_fft=self.frame_size,
-                               hop_length=self.hop_length,
-                               window=self.window)
+        # fft_frames = rosa.stft(signal, n_fft=self.frame_size,
+        #                        hop_length=self.hop_length,
+        #                        window=self.window)
 
         if self.freq_slice is not None:
             fft_frames = fft_frames[self.freq_slice]

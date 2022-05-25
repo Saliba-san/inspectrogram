@@ -26,18 +26,22 @@ export function MusicContextProvider(props: MusicaContextTypeProviderPorps) {
     async function updateMusicas(data: Musica[]) {
 
         console.log(data)
-        data.forEach(item => {
-            const newmusic: Musica = {
-                id: item.id,
-                artist: item.artist,
-                path: item.path,
-                music: item.music
-            }
-            setMusicas([
-                ...musicas,
-                newmusic
-            ])
-        })
+        if( musicas.length > 0) {
+            data.forEach(item => {
+                const newmusic: Musica = {
+                    id: item.id,
+                    artist: item.artist,
+                    path: item.path,
+                    music: item.music
+                }
+                setMusicas([
+                    ...musicas,
+                    newmusic
+                ])
+            })
+        } else  {
+            setMusicas(data)
+        }
 
     }
 
