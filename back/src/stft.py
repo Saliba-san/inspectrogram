@@ -16,6 +16,7 @@ class Stft():
         self.sr = parameters.sr
         self.db = parameters.db
         self.freq_slice = parameters.freq_slice
+        self.analysis = parameters.analysis
         self.spectral_maxima = None
 
     def set_stft(self, signal):

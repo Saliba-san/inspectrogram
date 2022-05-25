@@ -40,7 +40,10 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
     def visualize(self, stft, cmap):
 
         plt.imshow(stft.fft_frames, cmap=cmap)
-        plt.plot(stft.spectral_maxima, color="red", linewidth=0.1)
+
+        if stft.analysis == "complex":
+            plt.plot(stft.spectral_maxima, color="red", linewidth=0.1)
+
         plt.xlabel("")
         plt.ylabel("")
         plt.xticks([])
