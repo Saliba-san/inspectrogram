@@ -83,7 +83,7 @@ def musics_post():
     results = musics_schema.dump(musics)
     return jsonify(results)
 
-@app.route("/deletefile", methods=["GET", "DELETE"], strict_slashes=False)
+@app.route("/deletefile", methods=["GET", "POST"], strict_slashes=False)
 def music_delete():
 
     if 'id' not in request.form:
