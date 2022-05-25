@@ -6,7 +6,7 @@ import {
     OutlinedInput,
     Select,
     SelectChangeEvent,
-    TextField,
+    TextField, ToggleButton, ToggleButtonGroup,
     Typography
 } from "@mui/material";
 import React, {useState} from "react";
@@ -30,6 +30,7 @@ export function ParametersBox() {
     const [hoplength, setHopelength] = useState("512")
     const [mode, setMode] = useState("power")
     const [window, setWindow] = useState("hann")
+    const [intensity, setIntensity] = useState("db")
 
     const [openParam, setOpenParam] = useState(false)
 
@@ -44,6 +45,7 @@ export function ParametersBox() {
             hoplength: Number(hoplength),
             mode: mode,
             window: window,
+            intensity: intensity
         } as ParametersType
         console.log(parameters)
 
@@ -92,6 +94,30 @@ export function ParametersBox() {
                     setData={(data) => setHopelength(data)}
                     options={hoplenghtOption}
                 />
+
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    style={{paddingTop: 10}}
+                >
+                    <Typography
+                        variant={"subtitle1"}
+                        style={{color: "#ccc8c8"}}
+                    >
+                        Intensidade:
+                    </Typography>
+                    <ToggleButtonGroup
+                        color="primary"
+                        value={intensity}
+                        exclusive
+                        onChange={ (event, data) => setIntensity(data)}
+                    >
+                        <ToggleButton value="db" style={{color: "#ccc8c8", paddingLeft: 20}} >dB</ToggleButton>
+                        <ToggleButton value="amp" style={{color: "#ccc8c8"}} >Amp</ToggleButton>
+                    </ToggleButtonGroup>
+                </Grid>
 
                 <div style={{marginTop: 10}}>
                     <Grid
