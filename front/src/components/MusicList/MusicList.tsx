@@ -31,9 +31,11 @@ export function MusicList() {
      * TODO concertar ID
      */
     function handleSaveParameters(){
-        setParameters({
-            specid: musicid.toString()
-        })
+        if (musicas !== undefined ) {
+            setParameters({
+                specid: (musicas[musicid].id).toString()
+            })
+        }
         setOpenParam(false)
     }
 

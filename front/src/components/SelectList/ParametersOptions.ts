@@ -1,15 +1,11 @@
 export const framelengthOption = {
-    256: {
-        title: "256",
-        value: 256
+    1024: {
+        title: "1024",
+        value: 1024
     },
     512: {
         title: "512",
         value: 512
-    },
-    1024: {
-        title: "1024",
-        value: 1024
     },
     2048: {
         title: "2048",
@@ -100,29 +96,13 @@ export const cmapOption = {
 }
 
 export const hoplenghtOption = {
-    512: {
-        title: "512",
-        value: 512
-    },
-    16: {
-        title: "16",
-        value: 16
-    },
-    32: {
-        title: "32",
-        value: 32
-    },
-    64: {
-        title: "64",
-        value: 64
-    },
-    128: {
-        title: "128",
-        value: 128
-    },
     256: {
         title: "256",
         value: 256
+    },
+    512: {
+        title: "512",
+        value: 512
     },
     1024: {
         title: "1024",
