@@ -89,6 +89,22 @@ export const useStyles = makeStyles({
         marginRight:10,
         fontSize: "1rem",
     },
+    deleteButton: {
+        fontWeight: 400,
+        borderRadius: 5,
+        height: 30,
+        paddingRight: 10,
+        paddingLeft: 10,
+        color: "#f12d2d",
+        background: "transparent",
+        border: "transparent",
+        '&:hover': {
+            background: "#454148",
+        },
+        transition: "step-end",
+        marginRight:10,
+        fontSize: "1rem",
+    },
     settingButton: {
         borderRadius: 100,
         background: "transparent",

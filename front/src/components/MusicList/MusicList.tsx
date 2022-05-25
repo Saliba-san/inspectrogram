@@ -15,7 +15,7 @@ export function MusicList() {
 
     const classes = useStyles();
 
-    const {musicas} = useMusica()
+    const {musicas, deleteMusica} = useMusica()
     const {setParameters} = useParameters()
 
     const [musicid, setMusicid] = useState(-1)
@@ -26,11 +26,13 @@ export function MusicList() {
     }
 
     function handleSaveParameters(){
-        if (musicas !== undefined ) {
-            setParameters({
-                specid: (musicas[musicid].id).toString()
-            })
-            console.log(musicas[musicid].id)
+        if (musicas !== undefined) {
+            if(musicas.length > 0) {
+                setParameters({
+                    specid: (musicas[musicid].id).toString()
+                })
+                console.log(musicas[musicid].id)
+            }
         }
         setOpenParam(false)
     }
@@ -39,9 +41,14 @@ export function MusicList() {
         setMusicid(index)
     }
 
-    function handleCole() {
+    function handleColese() {
         setOpenParam(false)
         setMusicid(-1)
+    }
+
+    function handleDelete() {
+
+        deleteMusica(musicid)
     }
 
     return(
@@ -87,19 +94,26 @@ export function MusicList() {
 
 
 
-                <div>
-                    <button
-                        onClick={() => handleSaveParameters()}
-                        className={classes.paramButton}
+                <div style={{marginTop: 10}}>
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
                     >
-                        Salvar
-                    </button>
-                    <button
-                        onClick={() => handleCole()}
-                        className={classes.paramButton}
-                    >
-                        Fechar
-                    </button>
+                        <button
+                            onClick={() => handleDelete()}
+                            className={classes.deleteButton}
+                        >
+                            Deletar
+                        </button>
+                        <button
+                            onClick={() => handleSaveParameters()}
+                            className={classes.paramButton}
+                        >
+                            Salvar
+                        </button>
+                    </Grid>
                 </div>
             </BaseDialog>
             <button
