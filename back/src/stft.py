@@ -79,7 +79,7 @@ class Stft():
 
     #     return np.mean(np.argpartition(fft_frame, -n)[-n:])
 
-    def set_spectral_maxima(self, stft_params, n=1):
+    def set_spectral_maxima(self, n=1):
 
         maxima = np.zeros(self.fft_frames.shape[1])
 
