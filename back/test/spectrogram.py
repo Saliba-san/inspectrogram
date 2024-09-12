@@ -6,6 +6,8 @@ import copy
 import io
 import base64
 
+mpl.rcParams['savefig.pad_inches'] = 0
+
 class VisualizationStrategy(ABC):
 
     @abstractmethod
@@ -24,14 +26,14 @@ class RosaVisualizationStrategy(VisualizationStrategy):
                     y_axis="linear")
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png')
+        plt.autoscale(tight=True)
+        plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
 
         return b64_img
-
 
 class MatplotVisualizationStrategy(VisualizationStrategy):
 
@@ -44,13 +46,15 @@ class MatplotVisualizationStrategy(VisualizationStrategy):
         plt.yticks([])
 
         bytes_string = io.BytesIO()
-        plt.savefig(bytes_string, format='png')
+        plt.autoscale(tight=True)
+        plt.margins(x=0)
+        plt.margins(y=0)
+        plt.savefig(bytes_string, format='png', bbox_inches="tight")
         bytes_string.seek(0)
         b64_img = base64.b64encode(bytes_string.read())
 
         plt.close()
         return b64_img
-
 
 class Spectrogram():
 

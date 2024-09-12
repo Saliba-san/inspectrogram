@@ -27,9 +27,10 @@ def musics():
     #path = np.array(results)[idxs]['path']
     return (jsonify(results))
 
-@app.route("/musics-post", methods=["GET","POST"], strict_slashes=False)
+@app.route("/uploadfile", methods=["GET","POST"], strict_slashes=False)
 def musics_post():
 	if request.method == "POST":
+		print(request)
 		if 'file' not in request.files:
 			flash('No file part')
 			return redirect(request.url)
